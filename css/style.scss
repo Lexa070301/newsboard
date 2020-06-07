@@ -1,29 +1,96 @@
 @import "fonts";
+
 $main_color: #FF7400;
 $sub_color: #009999;
+$dark: #323232;
 body {
   box-sizing: border-box;
   font-family: 'Comfortaa', Helvetica, sans-serif;
   padding: 0;
   overflow-x: hidden;
   background-color: #f5f5f5;
+  color: $dark;
+}
+@mixin tr {
+  transition: 0.3s ease all;
 }
 ul, ol, p, h1, h2, h3, h4 {
   padding: 0;
   margin: 0;
 }
+
+ul, ol {
+  list-style: none;
+}
+
 h1, h2, h3, h4 {
   font-family: 'Georgia', "Times New Roman", serif;
 }
+
 .container {
   width: 1170px;
   margin: 0px auto;
+  height: 100%;
 }
+
 .common-title {
   font-size: 36px;
   font-weight: bold;
 }
-header {
+
+//
+// Header
+//
+.header {
   background-color: white;
+  height: 50px;
+  box-shadow: 0px 0px 30px rgba(0,0,0,0.1);
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
+
+.header__logo {
+  height: 70%;
+}
+
+.header__logo__img {
+  height: 100%;
+}
+.menu {
+  height: 100%;
+}
+.menu__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.menu__list__item {
+  height: 100%;
+  padding: 0px 10px;
+  box-sizing: border-box;
+  border-bottom: 3px solid rgba(0,0,0,0);
+  @include tr;
+  &:hover {
+    border-bottom: 3px solid $main_color;
+  }
+
+}
+.menu__list__item-active {
+  border-bottom: 3px solid $main_color;
+}
+.menu__list__item__link {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: $dark;
+  font-weight: bold;
+}
+
 @import "media";
