@@ -1,4 +1,15 @@
 $(document).ready(function () {
+    $("#navToggle").click(function() {
+        $(this).toggleClass("active");
+        $(".overlay").toggleClass("open");
+        // this line ▼ prevents content scroll-behind
+        $("body").toggleClass("locked");
+    });
+    $('.overlay').click(function() {
+        $(this).removeClass('open');
+        $("body").toggleClass("locked");
+        $('.navBurger').removeClass('active');
+    });
     var last_news = new Swiper('.last_news-container', {
         direction: 'horizontal',
         loop: true,

@@ -100,7 +100,15 @@ h1, h2, h3, h4 {
   color: $dark;
   font-weight: bold;
 }
-
+.menu-wrap {
+  height: 100%;
+}
+.navBurger {
+  display: none;
+}
+.cabinet-mobile {
+  display: none;
+}
 .cabinet {
   display: flex;
   justify-content: space-between;

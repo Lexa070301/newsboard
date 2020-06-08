@@ -26,22 +26,61 @@
         <a href="./" class="header__logo">
             <img class="header__logo__img" src="img/logo.png" alt="Логотип" title="News Board">
         </a>
-        <nav class="menu">
-            <ul class="menu__list">
-                <li class="menu__list__item menu__list__item-active">
-                    <a href="./" class="menu__list__item__link">Главная</a>
-                </li>
-                <li class="menu__list__item">
-                    <a href="./politics" class="menu__list__item__link">Политика</a>
-                </li>
-                <li class="menu__list__item">
-                    <a href="./economy" class="menu__list__item__link">Экономика</a>
-                </li>
-                <li class="menu__list__item">
-                    <a href="./sport" class="menu__list__item__link">Спорт</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="overlay menu-wrap">
+            <nav class="menu overlayMenu">
+                <ul class="menu__list" role="menu">
+                    <li class="menu__list__item menu__list__item-active">
+                        <a href="./" class="menu__list__item__link" role="menuitem">Главная</a>
+                    </li>
+                    <li class="menu__list__item">
+                        <a href="./politics" class="menu__list__item__link" role="menuitem">Политика</a>
+                    </li>
+                    <li class="menu__list__item">
+                        <a href="./economy" class="menu__list__item__link" role="menuitem">Экономика</a>
+                    </li>
+                    <li class="menu__list__item">
+                        <a href="./sport" class="menu__list__item__link" role="menuitem">Спорт</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="cabinet-mobile">
+                <button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
+                <button class="cabinet__btn cabinet__enter">Войти</button>
+                <a href="#" class="cabinet__link">
+                    <img src="img/icons/user.svg" alt="Личный кабинет">
+                </a>
+                <div class="cabinet__registration-modal" data-remodal-id="cabinet__registration__modal">
+                    <div class="cabinet__modal__container">
+                        <h2 class="cabinet__modal__title">Регистрация</h2>
+                        <form action="./" method="post" class="cabinet__modal__from" id="cabinet__registration__form">
+                            <input required type="text" name="name" class="name form-input" placeholder="Ваше имя">
+                            <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
+                                   pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
+                            <input required type="password" name="password" class="password form-input"
+                                   placeholder="Введите пароль">
+                            <input required type="password" name="password2" class="password form-input"
+                                   placeholder="Повторите пароль">
+                            <input disabled class="remodal-confirm" type="submit" value="Зарегистрироваться">
+                        </form>
+                    </div>
+                    <a class="remodal-cancel" href="#">х</a>
+                </div>
+                <div class="cabinet__enter-modal" data-remodal-id="cabinet__enter__modal">
+                    <div class="cabinet__modal__container">
+                        <h2 class="cabinet__modal__title">Вход</h2>
+                        <form action="./" method="post" class="cabinet__modal__from" id="cabinet__enter__form">
+                            <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
+                                   pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
+                            <input required type="password" name="password" class="password form-input"
+                                   placeholder="Введите пароль">
+                            <input disabled class="remodal-confirm" type="submit" value="Войти">
+                        </form>
+                    </div>
+                    <a class="remodal-cancel" href="#">х</a>
+                </div>
+            </div>
+        </div>
+
         <div class="cabinet">
             <button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
             <button class="cabinet__btn cabinet__enter">Войти</button>
@@ -53,9 +92,10 @@
                     <h2 class="cabinet__modal__title">Регистрация</h2>
                     <form action="./" method="post" class="cabinet__modal__from" id="cabinet__registration__form">
                         <input required type="text" name="name" class="name form-input" placeholder="Ваше имя">
-                        <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail" pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
+                        <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
+                               pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
                         <input required type="password" name="password" class="password form-input"
-                                placeholder="Введите пароль">
+                               placeholder="Введите пароль">
                         <input required type="password" name="password2" class="password form-input"
                                placeholder="Повторите пароль">
                         <input disabled class="remodal-confirm" type="submit" value="Зарегистрироваться">
@@ -67,7 +107,8 @@
                 <div class="cabinet__modal__container">
                     <h2 class="cabinet__modal__title">Вход</h2>
                     <form action="./" method="post" class="cabinet__modal__from" id="cabinet__enter__form">
-                        <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail" pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
+                        <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
+                               pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
                         <input required type="password" name="password" class="password form-input"
                                placeholder="Введите пароль">
                         <input disabled class="remodal-confirm" type="submit" value="Войти">
@@ -76,6 +117,7 @@
                 <a class="remodal-cancel" href="#">х</a>
             </div>
         </div>
+        <div class="navBurger" role="navigation" id="navToggle"></div>
     </div>
 </header>
 <main>
