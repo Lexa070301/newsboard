@@ -314,4 +314,30 @@ h1, h2, h3, h4 {
 .board__grid__item__date-img {
   color: white;
 }
+//
+// Footer
+//
+footer {
+  background: $dark;
+  padding: 20px 0px;
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+.footer__logo__img {
+  height: 40px;
+}
+.footer__privacy-policy {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.footer__rights {
+  color: white;
+}
 @import "media";
