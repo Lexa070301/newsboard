@@ -1,56 +1,64 @@
-Dropzone.autoDiscover = false;
+if (typeof Dropzone == 'function') {
+    Dropzone.autoDiscover = false;
+}
 $(document).ready(function () {
-    var myDropzone = new Dropzone('#add-new-file', {
-        url: './',
-        method: 'post',
-        maxFiles: 1,
-        dictFallbackMessage: 'Не поддерживается вашим браузером',
-        dictFileTooBig: 'Размер файла слишком велик',
-        dictInvalidFileType: 'Неправильный тип файла',
-        acceptedFiles: 'image/*',
-        addRemoveLinks: true,
-    });
-    myDropzone._updateMaxFilesReachedClass()
-    myDropzone.on('maxfilesreached', function() {
-        myDropzone.removeEventListeners();
-    });
-    myDropzone.on('removedfile', function (file) {
-        myDropzone.setupEventListeners();
-    });
+    $('.drawer').drawer();
+    if (typeof Dropzone == 'function') {
+        var myDropzone = new Dropzone('#add-new-file', {
+            url: './',
+            method: 'post',
+            maxFiles: 1,
+            dictFallbackMessage: 'Не поддерживается вашим браузером',
+            dictFileTooBig: 'Размер файла слишком велик',
+            dictInvalidFileType: 'Неправильный тип файла',
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
+        });
+        myDropzone._updateMaxFilesReachedClass()
+        myDropzone.on('maxfilesreached', function () {
+            myDropzone.removeEventListeners();
+        });
+        myDropzone.on('removedfile', function (file) {
+            myDropzone.setupEventListeners();
+        });
+    }
     $('.dz-button').text('Перетащите картинку сюда');
-    $('ul.tabs__caption').on('click', 'li:not(.active)', function() {
+    $('ul.tabs__caption').on('click', 'li:not(.active)', function () {
         $(this)
             .addClass('active').siblings().removeClass('active')
             .closest('.tabs').find('.tabs__content').removeClass('active').eq($(this).index()).addClass('active');
     });
-    $("#navToggle").click(function() {
+    $("#navToggle").click(function () {
         $(this).toggleClass("active");
         $(".overlay").toggleClass("open");
         // this line ▼ prevents content scroll-behind
         $("body").toggleClass("locked");
     });
-    $('.overlay').click(function() {
+    $('.overlay').click(function () {
         $(this).removeClass('open');
         $("body").toggleClass("locked");
         $('.navBurger').removeClass('active');
     });
-    var last_news = new Swiper('.last_news-container', {
-        direction: 'horizontal',
-        loop: true,
-        navigation: {
-            nextEl: '.last_news-next',
-            prevEl: '.last_news-prev',
-        },
-        autoplay: {
-            delay: 5000,
-        }
-    });
+    if (typeof Swiper == 'function') {
+        var last_news = new Swiper('.last_news-container', {
+            direction: 'horizontal',
+            loop: true,
+            navigation: {
+                nextEl: '.last_news-next',
+                prevEl: '.last_news-prev',
+            },
+            autoplay: {
+                delay: 5000,
+            }
+        });
+    }
     $('.board__grid').masonry({
         itemSelector: '.board__grid__item',
         columnWidth: 300,
         gutter: 30,
         fitWidth: true
     });
+
     $('.cabinet__registration').on('click', function () {
         $('[data-remodal-id=cabinet__registration__modal]').remodal().open();
     });

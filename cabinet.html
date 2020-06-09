@@ -11,14 +11,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
 
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/remodal.css">
     <link rel="stylesheet" href="css/remodal-default-theme.css">
     <link rel="stylesheet" href="css/dropzone.min.css">
+    <link rel="stylesheet" href="css/drawer.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="drawer drawer--left">
 <header class="header">
     <div class="container">
         <a href="./" class="header__logo">
@@ -56,6 +55,16 @@
     </div>
 </header>
 <main class="cabinet-main tabs">
+    <button type="button" class="drawer-toggle drawer-hamburger">
+        <span class="sr-only">toggle navigation</span>
+        <span class="drawer-hamburger-icon"></span>
+    </button>
+    <div class="drawer-nav" role="navigation">
+        <ul class="drawer-menu tabs__caption">
+            <li class="active">Учетная запись</li>
+            <li>Предложить новость</li>
+        </ul>
+    </div>
     <aside class="cabinet-main__sidebar">
         <ul class="tabs__caption">
             <li class="active">Учетная запись</li>
@@ -117,11 +126,11 @@
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>
 <script src="js/jquery.fancybox.min.js"></script>
-<script src="js/swiper.min.js"></script>
-<script src="js/masonry.pkgd.min.js"></script>
-<script src="js/jquery.tabslet.min.js"></script>
 <script src="js/remodal.min.js"></script>
 <script src="js/dropzone.min.js"></script>
+<script src="js/masonry.pkgd.min.js"></script>
+<script src="js/iscroll.min.js"></script>
+<script src="js/drawer.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

@@ -738,4 +738,25 @@ footer {
     box-shadow: 0px 0px 10px rgba($main_color, 0.7);
   }
 }
+.drawer-hamburger {
+  top: 60px;
+  left: 5px;
+  z-index: 12;
+  display: none;
+}
+.drawer-nav {
+  padding-top: 20px;
+  z-index: 11;
+}
+.drawer-menu {
+  box-sizing: border-box;
+  padding: 20px;
+
+}
+.drawer-open {
+  .drawer-hamburger {
+    left: 200px !important;
+    top: 0px !important;
+  }
+}
 @import "media";
