@@ -2,8 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Keywords" content="новости, политика, экономика, спорт, news board">
     <meta name="description" content="Актуальные новости со всего света, собраные вместе для удобного восприятия.">
@@ -46,13 +45,13 @@
             <div class="cabinet-mobile">
                 <button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
                 <button class="cabinet__btn cabinet__enter">Войти</button>
-                <a href="#" class="cabinet__link">
+                <a href="./cabinet" class="cabinet__link">
                     <img src="img/icons/user.svg" alt="Личный кабинет">
                 </a>
                 <div class="cabinet__registration-modal" data-remodal-id="cabinet__registration__modal">
                     <div class="cabinet__modal__container">
                         <h2 class="cabinet__modal__title">Регистрация</h2>
-                        <form action="./" method="post" class="cabinet__modal__from" id="cabinet__registration__form">
+                        <form action="./" method="post" class="cabinet__modal__from cabinet__registration__form">
                             <input required type="text" name="name" class="name form-input" placeholder="Ваше имя">
                             <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
                                    pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
@@ -68,7 +67,7 @@
                 <div class="cabinet__enter-modal" data-remodal-id="cabinet__enter__modal">
                     <div class="cabinet__modal__container">
                         <h2 class="cabinet__modal__title">Вход</h2>
-                        <form action="./" method="post" class="cabinet__modal__from" id="cabinet__enter__form">
+                        <form action="./" method="post" class="cabinet__modal__from cabinet__enter__form">
                             <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
                                    pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
                             <input required type="password" name="password" class="password form-input"
@@ -90,7 +89,7 @@
             <div class="cabinet__registration-modal" data-remodal-id="cabinet__registration__modal">
                 <div class="cabinet__modal__container">
                     <h2 class="cabinet__modal__title">Регистрация</h2>
-                    <form action="./" method="post" class="cabinet__modal__from" id="cabinet__registration__form">
+                    <form action="./" method="post" class="cabinet__modal__from cabinet__registration__form">
                         <input required type="text" name="name" class="name form-input" placeholder="Ваше имя">
                         <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
                                pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
@@ -106,7 +105,7 @@
             <div class="cabinet__enter-modal" data-remodal-id="cabinet__enter__modal">
                 <div class="cabinet__modal__container">
                     <h2 class="cabinet__modal__title">Вход</h2>
-                    <form action="./" method="post" class="cabinet__modal__from" id="cabinet__enter__form">
+                    <form action="./" method="post" class="cabinet__modal__from cabinet__enter__form">
                         <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
                                pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
                         <input required type="password" name="password" class="password form-input"
@@ -186,7 +185,7 @@
         <div class="container">
             <div class="board__grid">
                 <a href="#" class="board__grid__item">
-                    <img src="img/news/img4.webp" alt="Картинка новости" width="100%" class="board__grid__item__img">
+                    <img src="img/news/img4.webp" alt="Картинка новости" class="board__grid__item__img">
                     <h3 class="board__grid__item__title-img">С Днем океанов! Красота, ужас и загадки обитателей
                         глубин</h3>
                     <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>
@@ -199,7 +198,7 @@
 
                 </a>
                 <a href="#" class="board__grid__item">
-                    <img src="img/news/img5.webp" alt="Картинка новости" width="100%" class="board__grid__item__img">
+                    <img src="img/news/img5.webp" alt="Картинка новости" class="board__grid__item__img">
                     <h3 class="board__grid__item__title-img">Сам себе фотограф: как организовать профессиональную
                         съемку
                         дома</h3>
@@ -212,14 +211,14 @@
 
                 </a>
                 <a href="#" class="board__grid__item">
-                    <img src="img/news/img6.webp" alt="Картинка новости" width="100%" class="board__grid__item__img">
+                    <img src="img/news/img6.webp" alt="Картинка новости" class="board__grid__item__img">
                     <h3 class="board__grid__item__title-img">Невозможно устоять. Ученые объяснили, почему зевок
                         заразителен</h3>
                     <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>
                 </a>
 
                 <a href="#" class="board__grid__item">
-                    <img src="img/news/img7.webp" alt="Картинка новости" width="100%" class="board__grid__item__img">
+                    <img src="img/news/img7.webp" alt="Картинка новости" class="board__grid__item__img">
                     <h3 class="board__grid__item__title-img">Будни вагоновожатой на самом необычном маршруте в
                         России</h3>
                     <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>
@@ -237,12 +236,10 @@
 
                 </a>
                 <a href="#" class="board__grid__item">
-                    <img src="img/news/img8.webp" alt="Картинка новости" width="100%" class="board__grid__item__img">
+                    <img src="img/news/img8.webp" alt="Картинка новости" class="board__grid__item__img">
                     <h3 class="board__grid__item__title-img">Залили деньгами: ФРС может обвалить мировые рынки</h3>
                     <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>
-
                 </a>
-
             </div>
         </div>
     </section>

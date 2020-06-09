@@ -6,10 +6,21 @@ $dark: #323232;
 body {
   box-sizing: border-box;
   font-family: 'Comfortaa', Helvetica, sans-serif;
-  padding: 0;
+  padding: 0!important;
   overflow-x: hidden;
   background-color: #f5f5f5;
   color: $dark;
+}
+body::-webkit-scrollbar {
+  width: 7px;
+  background: none;
+}
+body::-webkit-scrollbar-track-piece {
+  background: none;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: $main_color;
+  border-radius: 5px;
 }
 
 @mixin tr {
@@ -152,6 +163,9 @@ h1, h2, h3, h4 {
 }
 .remodal {
   width: auto;
+}
+.remodal-wrapper {
+  padding: 0!important;
 }
 .remodal-cancel {
   position: absolute;
@@ -381,6 +395,7 @@ input[disabled] {
 .board__grid__item__img {
   position: relative;
   z-index: 1;
+  width: 100%;
   @include tr;
   filter: brightness(70%);
 }
