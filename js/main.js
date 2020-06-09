@@ -1,4 +1,28 @@
+Dropzone.autoDiscover = false;
 $(document).ready(function () {
+    var myDropzone = new Dropzone('#add-new-file', {
+        url: './',
+        method: 'post',
+        maxFiles: 1,
+        dictFallbackMessage: 'Не поддерживается вашим браузером',
+        dictFileTooBig: 'Размер файла слишком велик',
+        dictInvalidFileType: 'Неправильный тип файла',
+        acceptedFiles: 'image/*',
+        addRemoveLinks: true,
+    });
+    myDropzone._updateMaxFilesReachedClass()
+    myDropzone.on('maxfilesreached', function() {
+        myDropzone.removeEventListeners();
+    });
+    myDropzone.on('removedfile', function (file) {
+        myDropzone.setupEventListeners();
+    });
+    $('.dz-button').text('Перетащите картинку сюда');
+    $('ul.tabs__caption').on('click', 'li:not(.active)', function() {
+        $(this)
+            .addClass('active').siblings().removeClass('active')
+            .closest('.tabs').find('.tabs__content').removeClass('active').eq($(this).index()).addClass('active');
+    });
     $("#navToggle").click(function() {
         $(this).toggleClass("active");
         $(".overlay").toggleClass("open");

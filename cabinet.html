@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/remodal.css">
     <link rel="stylesheet" href="css/remodal-default-theme.css">
+    <link rel="stylesheet" href="css/dropzone.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -26,7 +27,7 @@
         <div class="overlay menu-wrap">
             <nav class="menu overlayMenu">
                 <ul class="menu__list" role="menu">
-                    <li class="menu__list__item menu__list__item-active">
+                    <li class="menu__list__item">
                         <a href="./" class="menu__list__item__link" role="menuitem">Главная</a>
                     </li>
                     <li class="menu__list__item">
@@ -54,8 +55,55 @@
         <div class="navBurger" role="navigation" id="navToggle"></div>
     </div>
 </header>
-<main>
-
+<main class="cabinet-main tabs">
+    <aside class="cabinet-main__sidebar">
+        <ul class="tabs__caption">
+            <li class="active">Учетная запись</li>
+            <li>Предложить новость</li>
+        </ul>
+    </aside>
+    <div class="cabinet-main__content">
+        <h1 class="tabs__content__main-title">Добро пожаловать, [Name]</h1>
+        <div class="tabs__content active">
+            <form action="./" method="post" class="cabinet-main__content__form">
+                <div class="cabinet-main__content__form__left">
+                    <h2>Сменить имя:</h2>
+                    <label for="new-name">Ваше новое имя:</label>
+                    <input type="text" name="new-name" id="new-name" class="form-input" placeholder="Ваше новое имя">
+                    <h2>Сменить email:</h2>
+                    <label for="new-email">Ваш новый E-mail:</label>
+                    <input type="email" name="new-email" id="new-email" class="form-input" placeholder="Ваш новый e-mail">
+                    <input type="submit" value="Сохранить" class="cabinet-main__content__form__save">
+                </div>
+                <div class="cabinet-main__content__form__right">
+                    <h2>Сменить пароль:</h2>
+                    <label for="old-password">Введите ваш старый пароль:</label>
+                    <input type="password" name="old-password" id="old-password" class="form-input"
+                           placeholder="Ваше старый пароль">
+                    <label for="new-password">Придумайте новый пароль:</label>
+                    <input type="password" name="new-password" id="new-password" class="form-input"
+                           placeholder="Ваш новый пароль">
+                    <label for="new-password2">Повторите новый пароль:</label>
+                    <input type="password" name="new-password2" id="new-password2" class="form-input"
+                           placeholder="Ваш новый пароль">
+                </div>
+            </form>
+        </div>
+        <div class="tabs__content">
+            <h2>Предложить новость:</h2>
+            <form action="./" method="post" id="add-new" class="add-new">
+                <label for="add-new-title">Заголовок (Максимум 60 символов)<span>*</span>:</label>
+                <input type="text" maxlength="60" name="add-new-title" id="add-new-title" class="form-input"
+                       placeholder="Заголовок новости">
+                <label for="add-new-text">Текст<span>*</span>:</label>
+                <textarea placeholder="Текст новости" name="add-new-text" id="add-new-text"
+                          class="form-input"></textarea>
+                <label for="add-new-file">Загрузите картинку:</label>
+                <div class="dropzone" id="add-new-file"></div>
+                <input type="submit" value="Отправить" class="add-new-send">
+            </form>
+        </div>
+    </div>
 </main>
 <footer>
     <div class="container">
@@ -71,7 +119,9 @@
 <script src="js/jquery.fancybox.min.js"></script>
 <script src="js/swiper.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>
+<script src="js/jquery.tabslet.min.js"></script>
 <script src="js/remodal.min.js"></script>
+<script src="js/dropzone.min.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
