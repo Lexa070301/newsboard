@@ -1,6 +1,6 @@
 <?php
 include('connect.php');
-$news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news'));
+$news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id'), MYSQLI_BOTH);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -128,28 +128,28 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news'));
             <div class="last_news-container">
                 <div class="swiper-wrapper">
                     <a href="#" class="swiper-slide last_news__slide-1"
-                       style="background: url('img/news/img1.webp') center center no-repeat;
+                       style="background: url('img/news/img<?php echo $news[0]['id']?>.webp') center center no-repeat;
                        background-size: cover">
                         <h2 class="last_news__slide__title">
-                            Число случаев заражения коронавирусом в мире привысило 7 миллионов
+                            <?php echo $news[0]['title'];?>
                         </h2>
-                        <span class="last_news__date">08.06.2020</span>
+                        <span class="last_news__date"><?php echo $news[0]['date'];?></span>
                     </a>
                     <a href="#" class="swiper-slide last_news__slide-2"
-                       style="background: url('img/news/img2.webp') center center no-repeat;
+                       style="background: url('img/news/img<?php echo $news[1]['id']?>.webp') center center no-repeat;
                        background-size: cover">
                         <h2 class="last_news__slide__title">
-                            США собираются "подарить" Германию России
+                            <?php echo $news[1]['title'];?>
                         </h2>
-                        <span class="last_news__date">08.06.2020</span>
+                        <span class="last_news__date"><?php echo $news[1]['date'];?></span>
                     </a>
                     <a href="#" class="swiper-slide last_news__slide-3"
-                       style="background: url('img/news/img3.webp') center center no-repeat;
+                       style="background: url('img/news/img<?php echo $news[2]['id']?>.webp') center center no-repeat;
                        background-size: cover">
                         <h2 class="last_news__slide__title">
-                            Диетолог рассказала, как правильно выбрать хлеб
+                            <?php echo $news[2]['title'];?>
                         </h2>
-                        <span class="last_news__date">08.06.2020</span>
+                        <span class="last_news__date"><?php echo $news[2]['date'];?></span>
                     </a>
                 </div>
                 <div class="last_news-prev swiper-button-prev"></div>
@@ -159,26 +159,25 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news'));
                 <li class="right_news__item">
                     <a href="#" class="right_news__item__link">
                         <h3 class="right_news__item__link__title">
-                            Россиян ждет четырехдневная рабочая неделя в связи с
-                            Днем России
+                            <?php echo $news[3]['title'];?>
                         </h3>
-                        <span class="right_news__item__link__date">08.06.2020</span>
+                        <span class="right_news__item__link__date"><?php echo $news[3]['date'];?></span>
                     </a>
                 </li>
                 <li class="right_news__item">
                     <a href="#" class="right_news__item__link">
                         <h3 class="right_news__item__link__title">
-                            В Москве задержали злоумышленника, стрелявшего из окна дома
+                            <?php echo $news[4]['title'];?>
                         </h3>
-                        <span class="right_news__item__link__date">08.06.2020</span>
+                        <span class="right_news__item__link__date"><?php echo $news[4]['date'];?></span>
                     </a>
                 </li>
                 <li class="right_news__item">
                     <a href="#" class="right_news__item__link">
                         <h3 class="right_news__item__link__title">
-                            Цена нефти марки WTI достигла $40 за баррель впервые с 6 марта
+                            <?php echo $news[5]['title'];?>
                         </h3>
-                        <span class="right_news__item__link__date">08.06.2020</span>
+                        <span class="right_news__item__link__date"><?php echo $news[5]['date'];?></span>
                     </a>
                 </li>
             </ul>
@@ -187,62 +186,55 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news'));
     <section class="board">
         <div class="container">
             <div class="board__grid">
-                <a href="#" class="board__grid__item">
-                    <img src="img/news/img4.webp" alt="Картинка новости" class="board__grid__item__img">
-                    <h3 class="board__grid__item__title-img">С Днем океанов! Красота, ужас и загадки обитателей
-                        глубин</h3>
-                    <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>
+                <?php
+                for ($i = 6; $i<10; $i++) {
+                    echo '<a href="./post' . $news[$i]['id'] . '" class="board__grid__item">';
+                    if (($i % 2 == 0) || ($i % 3 == 0)) {
+                        echo '<img src="img/news/img' . $news[$i]['id'] . '.webp" alt="Картинка новости" class="board__grid__item__img">';
+                        echo '<h3 class="board__grid__item__title-img">' . $news[$i]['title'] . '</h3>
+                    <span class="board__grid__item__date board__grid__item__date-img">' . $news[$i]['date'] . '</span></a>';
+                    } else {
+                        echo '<h3 class="board__grid__item__title">' . $news[$i]['title'] . '</h3>
+                    <span class="board__grid__item__date board__grid__item__date">' . $news[$i]['date'] . '</span></a>';
+                    }
 
-                </a>
-                <a href="#" class="board__grid__item">
-                    <h3 class="board__grid__item__title">Более тысячи москвичей, победивших COVID-19, захотели стать
-                        волонтерами</h3>
-                    <span class="board__grid__item__date">20.08.2020</span>
-
-                </a>
-                <a href="#" class="board__grid__item">
-                    <img src="img/news/img5.webp" alt="Картинка новости" class="board__grid__item__img">
-                    <h3 class="board__grid__item__title-img">Сам себе фотограф: как организовать профессиональную
-                        съемку
-                        дома</h3>
-                    <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>
-
-                </a>
-                <a href="#" class="board__grid__item">
-                    <h3 class="board__grid__item__title">Работодателей Мурманска стимулируют нанимать молодежь</h3>
-                    <span class="board__grid__item__date">20.08.2020</span>
-
-                </a>
-                <a href="#" class="board__grid__item">
-                    <img src="img/news/img6.webp" alt="Картинка новости" class="board__grid__item__img">
-                    <h3 class="board__grid__item__title-img">Невозможно устоять. Ученые объяснили, почему зевок
-                        заразителен</h3>
-                    <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>
-                </a>
-
-                <a href="#" class="board__grid__item">
-                    <img src="img/news/img7.webp" alt="Картинка новости" class="board__grid__item__img">
-                    <h3 class="board__grid__item__title-img">Будни вагоновожатой на самом необычном маршруте в
-                        России</h3>
-                    <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>
-
-                </a>
-                <a href="#" class="board__grid__item">
-                    <h3 class="board__grid__item__title">"Весь в перьях": Лоза вновь ответил на шутку Киркорова</h3>
-                    <span class="board__grid__item__date">20.08.2020</span>
-
-                </a>
-                <a href="#" class="board__grid__item">
-                    <h3 class="board__grid__item__title">Британский депутат обвинил Берлин в предательстве из-за
-                        российского газа</h3>
-                    <span class="board__grid__item__date">20.08.2020</span>
-
-                </a>
-                <a href="#" class="board__grid__item">
-                    <img src="img/news/img8.webp" alt="Картинка новости" class="board__grid__item__img">
-                    <h3 class="board__grid__item__title-img">Залили деньгами: ФРС может обвалить мировые рынки</h3>
-                    <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>
-                </a>
+                }
+                ?>
+<!--                <a href="#" class="board__grid__item">-->
+<!--                    <h3 class="board__grid__item__title">Работодателей Мурманска стимулируют нанимать молодежь</h3>-->
+<!--                    <span class="board__grid__item__date">20.08.2020</span>-->
+<!---->
+<!--                </a>-->
+<!--                <a href="#" class="board__grid__item">-->
+<!--                    <img src="img/news/img6.webp" alt="Картинка новости" class="board__grid__item__img">-->
+<!--                    <h3 class="board__grid__item__title-img">Невозможно устоять. Ученые объяснили, почему зевок-->
+<!--                        заразителен</h3>-->
+<!--                    <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>-->
+<!--                </a>-->
+<!---->
+<!--                <a href="#" class="board__grid__item">-->
+<!--                    <img src="img/news/img7.webp" alt="Картинка новости" class="board__grid__item__img">-->
+<!--                    <h3 class="board__grid__item__title-img">Будни вагоновожатой на самом необычном маршруте в-->
+<!--                        России</h3>-->
+<!--                    <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>-->
+<!---->
+<!--                </a>-->
+<!--                <a href="#" class="board__grid__item">-->
+<!--                    <h3 class="board__grid__item__title">"Весь в перьях": Лоза вновь ответил на шутку Киркорова</h3>-->
+<!--                    <span class="board__grid__item__date">20.08.2020</span>-->
+<!---->
+<!--                </a>-->
+<!--                <a href="#" class="board__grid__item">-->
+<!--                    <h3 class="board__grid__item__title">Британский депутат обвинил Берлин в предательстве из-за-->
+<!--                        российского газа</h3>-->
+<!--                    <span class="board__grid__item__date">20.08.2020</span>-->
+<!---->
+<!--                </a>-->
+<!--                <a href="#" class="board__grid__item">-->
+<!--                    <img src="img/news/img8.webp" alt="Картинка новости" class="board__grid__item__img">-->
+<!--                    <h3 class="board__grid__item__title-img">Залили деньгами: ФРС может обвалить мировые рынки</h3>-->
+<!--                    <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>-->
+<!--                </a>-->
             </div>
         </div>
     </section>

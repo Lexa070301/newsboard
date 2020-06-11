@@ -107,7 +107,7 @@
                 <label for="add-new-text">Текст<span>*</span>:</label>
                 <textarea placeholder="Текст новости" name="add-new-text" id="add-new-text"
                           class="form-input"></textarea>
-                <label for="add-new-file">Загрузите картинку:</label>
+                <label for="add-new-file">Загрузите картинку<span>*</span>:</label>
                 <div class="dropzone" id="add-new-file"></div>
                 <input type="submit" value="Отправить" class="add-new-send">
             </form>
