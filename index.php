@@ -1,3 +1,7 @@
+<?php
+include('connect.php');
+$news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news'));
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -261,3 +265,6 @@
 <script src="js/main.js"></script>
 </body>
 </html>
+<?php
+mysqli_close($database);
+?>
