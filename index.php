@@ -127,7 +127,7 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id
         <div class="container">
             <div class="last_news-container">
                 <div class="swiper-wrapper">
-                    <a href="#" class="swiper-slide last_news__slide-1"
+                    <a href="./post?id=<?php echo $news[0]['id']?>" class="swiper-slide last_news__slide-1"
                        style="background: url('img/news/img<?php echo $news[0]['id']?>.webp') center center no-repeat;
                        background-size: cover">
                         <h2 class="last_news__slide__title">
@@ -135,7 +135,7 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id
                         </h2>
                         <span class="last_news__date"><?php echo $news[0]['date'];?></span>
                     </a>
-                    <a href="#" class="swiper-slide last_news__slide-2"
+                    <a href="./post?id=<?php echo $news[1]['id']?>" class="swiper-slide last_news__slide-2"
                        style="background: url('img/news/img<?php echo $news[1]['id']?>.webp') center center no-repeat;
                        background-size: cover">
                         <h2 class="last_news__slide__title">
@@ -143,7 +143,7 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id
                         </h2>
                         <span class="last_news__date"><?php echo $news[1]['date'];?></span>
                     </a>
-                    <a href="#" class="swiper-slide last_news__slide-3"
+                    <a href="./post?id=<?php echo $news[2]['id']?>" class="swiper-slide last_news__slide-3"
                        style="background: url('img/news/img<?php echo $news[2]['id']?>.webp') center center no-repeat;
                        background-size: cover">
                         <h2 class="last_news__slide__title">
@@ -157,7 +157,7 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id
             </div>
             <ul class="right_news">
                 <li class="right_news__item">
-                    <a href="#" class="right_news__item__link">
+                    <a href="./post?id=<?php echo $news[3]['id']?>" class="right_news__item__link">
                         <h3 class="right_news__item__link__title">
                             <?php echo $news[3]['title'];?>
                         </h3>
@@ -165,7 +165,7 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id
                     </a>
                 </li>
                 <li class="right_news__item">
-                    <a href="#" class="right_news__item__link">
+                    <a href="./post?id=<?php echo $news[4]['id']?>" class="right_news__item__link">
                         <h3 class="right_news__item__link__title">
                             <?php echo $news[4]['title'];?>
                         </h3>
@@ -173,7 +173,7 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id
                     </a>
                 </li>
                 <li class="right_news__item">
-                    <a href="#" class="right_news__item__link">
+                    <a href="./post?id=<?php echo $news[5]['id']?>" class="right_news__item__link">
                         <h3 class="right_news__item__link__title">
                             <?php echo $news[5]['title'];?>
                         </h3>
@@ -188,7 +188,7 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id
             <div class="board__grid">
                 <?php
                 for ($i = 6; $i<10; $i++) {
-                    echo '<a href="./post' . $news[$i]['id'] . '" class="board__grid__item">';
+                    echo '<a href="./post?id=' . $news[$i]['id'] . '" class="board__grid__item">';
                     if (($i % 2 == 0) || ($i % 3 == 0)) {
                         echo '<img src="img/news/img' . $news[$i]['id'] . '.webp" alt="Картинка новости" class="board__grid__item__img">';
                         echo '<h3 class="board__grid__item__title-img">' . $news[$i]['title'] . '</h3>
@@ -200,41 +200,6 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id
 
                 }
                 ?>
-<!--                <a href="#" class="board__grid__item">-->
-<!--                    <h3 class="board__grid__item__title">Работодателей Мурманска стимулируют нанимать молодежь</h3>-->
-<!--                    <span class="board__grid__item__date">20.08.2020</span>-->
-<!---->
-<!--                </a>-->
-<!--                <a href="#" class="board__grid__item">-->
-<!--                    <img src="img/news/img6.webp" alt="Картинка новости" class="board__grid__item__img">-->
-<!--                    <h3 class="board__grid__item__title-img">Невозможно устоять. Ученые объяснили, почему зевок-->
-<!--                        заразителен</h3>-->
-<!--                    <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>-->
-<!--                </a>-->
-<!---->
-<!--                <a href="#" class="board__grid__item">-->
-<!--                    <img src="img/news/img7.webp" alt="Картинка новости" class="board__grid__item__img">-->
-<!--                    <h3 class="board__grid__item__title-img">Будни вагоновожатой на самом необычном маршруте в-->
-<!--                        России</h3>-->
-<!--                    <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>-->
-<!---->
-<!--                </a>-->
-<!--                <a href="#" class="board__grid__item">-->
-<!--                    <h3 class="board__grid__item__title">"Весь в перьях": Лоза вновь ответил на шутку Киркорова</h3>-->
-<!--                    <span class="board__grid__item__date">20.08.2020</span>-->
-<!---->
-<!--                </a>-->
-<!--                <a href="#" class="board__grid__item">-->
-<!--                    <h3 class="board__grid__item__title">Британский депутат обвинил Берлин в предательстве из-за-->
-<!--                        российского газа</h3>-->
-<!--                    <span class="board__grid__item__date">20.08.2020</span>-->
-<!---->
-<!--                </a>-->
-<!--                <a href="#" class="board__grid__item">-->
-<!--                    <img src="img/news/img8.webp" alt="Картинка новости" class="board__grid__item__img">-->
-<!--                    <h3 class="board__grid__item__title-img">Залили деньгами: ФРС может обвалить мировые рынки</h3>-->
-<!--                    <span class="board__grid__item__date board__grid__item__date-img">20.08.2020</span>-->
-<!--                </a>-->
             </div>
         </div>
     </section>

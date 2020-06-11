@@ -102,10 +102,10 @@
             <h2>Предложить новость:</h2>
             <form action="./" method="post" id="add-new" class="add-new">
                 <label for="add-new-title">Заголовок (Максимум 60 символов)<span>*</span>:</label>
-                <input type="text" maxlength="60" name="add-new-title" id="add-new-title" class="form-input"
+                <input required type="text" maxlength="60" name="add-new-title" id="add-new-title" class="form-input"
                        placeholder="Заголовок новости">
                 <label for="add-new-text">Текст<span>*</span>:</label>
-                <textarea placeholder="Текст новости" name="add-new-text" id="add-new-text"
+                <textarea required placeholder="Текст новости" name="add-new-text" id="add-new-text"
                           class="form-input"></textarea>
                 <label for="add-new-file">Загрузите картинку<span>*</span>:</label>
                 <div class="dropzone" id="add-new-file"></div>

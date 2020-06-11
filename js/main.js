@@ -11,7 +11,7 @@ $(document).ready(function () {
             dictFallbackMessage: 'Не поддерживается вашим браузером',
             dictFileTooBig: 'Размер файла слишком велик',
             dictInvalidFileType: 'Неправильный тип файла',
-            acceptedFiles: 'image/*',
+            acceptedFiles: 'image/webp',
             addRemoveLinks: true,
         });
         myDropzone._updateMaxFilesReachedClass()

@@ -1,3 +1,11 @@
+<?php
+include('connect.php');
+$news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id'), MYSQLI_BOTH);
+$post = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id As id, title, name, date, text FROM news INNER JOIN users ON (author_id = users.id) WHERE news.id = ' . $_GET['id'] . ' ORDER BY news.id'), MYSQLI_BOTH);
+$meta = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id As id, title, name, date, text FROM news INNER JOIN users ON (author_id = users.id) WHERE news.id = ' . $_GET['id'] . ' ORDER BY news.id'), MYSQLI_BOTH);
+
+
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -122,20 +130,24 @@
     <section class="post">
         <div class="container">
             <h1 class="post__main-title">
-                Число случаев заражения коронавирусом в мире привысило 7 миллионов
+                <?php
+                if (isset($post[0]['title']))
+                    echo $post[0]['title'];
+                else {
+                    echo '<br><br>' . 'Ошибка 404 "Страница не найдена"' . '<br><br>';
+                }
+                ?>
             </h1>
             <div class="post__date-and-author">
-                <span class="post__date">11.06.2020</span>
-                <span class="post__author">Василий Васильевич Пупкин</span>
+                <span class="post__date"><?php echo $post[0]['date'] ?></span>
+                <span class="post__author"><?php echo $post[0]['name'] ?></span>
             </div>
-            <img src="img/news/img1.webp" class="post__img" alt="Картинка новости">
+            <?php
+            if (isset($post[0]['id']))
+                echo '<img src="img/news/img' . $post[0]['id'] . '.webp" class="post__img" alt="Картинка новости">';
+            ?>
             <p class="post__text">
-                Число случаев заражения коронавирусом нового типа в мире превысило 7,1 миллиона, свыше 408 тысяч человек
-                с COVID-19 скончались, сообщает Всемирная организация здравоохранения (ВОЗ).
-                Согласно последним данным организации, за сутки зарегистрирован 105 621 новый случай заболевания
-                COVID-19, умерли 3 629 пациентов. Таким образом, общее число выявленных случаев COVID-19 в мире
-                составляет 7 145 539, количество летальных исходов - 408 025. Всемирная организация здравоохранения 11
-                марта объявила вспышку новой коронавирусной инфекции COVID-19 пандемией.
+                <?php echo $post[0]['text'] ?>
             </p>
         </div>
     </section>
@@ -143,35 +155,39 @@
         <div class="container">
             <h2 class="post__title">Последние новости</h2>
             <ul class="post__last-news">
-                <li class="post__last-news__item" style="background: url('img/news/img2.webp') center
-                center no-repeat; background-size: cover">
-                    <a href="#" class="post__last-news__item__link">
+                <li class="post__last-news__item"
+                    style="background: url('img/news/img<?php echo $news[0]['id'] ?>.webp') center
+                            center no-repeat; background-size: cover">
+                    <a href="./post?id=<?php echo $news[0]['id']?>" class="post__last-news__item__link">
                         <h3 class="post__last-news__item__title">
-                            США собираются "подарить" Германию России
+                            <?php echo $news[0]['title'] ?>
                         </h3>
                     </a>
                 </li>
-                <li class="post__last-news__item" style="background: url('img/news/img3.webp') center
-                center no-repeat; background-size: cover">
-                    <a href="#" class="post__last-news__item__link">
+                <li class="post__last-news__item"
+                    style="background: url('img/news/img<?php echo $news[1]['id'] ?>.webp') center
+                            center no-repeat; background-size: cover">
+                    <a href="./post?id=<?php echo $news[1]['id']?>" class="post__last-news__item__link">
                         <h3 class="post__last-news__item__title">
-                            Диетолог рассказала, как правильно выбрать хлеб
+                            <?php echo $news[1]['title'] ?>
                         </h3>
                     </a>
                 </li>
-                <li class="post__last-news__item" style="background: url('img/news/img4.webp') center
-                center no-repeat; background-size: cover">
-                    <a href="#" class="post__last-news__item__link">
+                <li class="post__last-news__item"
+                    style="background: url('img/news/img<?php echo $news[2]['id'] ?>.webp') center
+                            center no-repeat; background-size: cover">
+                    <a href="./post?id=<?php echo $news[2]['id']?>" class="post__last-news__item__link">
                         <h3 class="post__last-news__item__title">
-                            С Днем океанов! Красота, ужас и загадки обитателей глубин
+                            <?php echo $news[2]['title'] ?>
                         </h3>
                     </a>
                 </li>
-                <li class="post__last-news__item" style="background: url('img/news/img5.webp') center
-                center no-repeat; background-size: cover">
-                    <a href="#" class="post__last-news__item__link">
+                <li class="post__last-news__item"
+                    style="background: url('img/news/img<?php echo $news[3]['id'] ?>.webp') center
+                            center no-repeat; background-size: cover">
+                    <a href="./post?id=<?php echo $news[3]['id']?>" class="post__last-news__item__link">
                         <h3 class="post__last-news__item__title">
-                            Сам себе фотограф: как организовать профессиональную съемку дома
+                            <?php echo $news[3]['title'] ?>
                         </h3>
                     </a>
                 </li>
