@@ -636,6 +636,7 @@ footer {
     padding: 20px;
     resize: none;
     height: 500px;
+    font-family: "Gilroy", Helvetica, sans-serif;
   }
   textarea.form-input::-webkit-scrollbar {
     width: 7px;
@@ -758,5 +759,32 @@ footer {
     left: 200px !important;
     top: 0px !important;
   }
+}
+//
+// Post
+//
+.post {
+  padding: 50px 0px;
+  .container {
+    max-width: 700px;
+  }
+}
+.post__main-title{
+  margin-bottom: 20px;
+}
+.post__img {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.post__text {
+  font-size: 18px;
+  line-height: 1.5em;
+  font-weight: normal;
+  font-family: 'Gilroy', Helvetica, sans-serif;
+}
+.post__date-and-author {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 @import "media";
