@@ -2,9 +2,8 @@
 include('connect.php');
 $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id'), MYSQLI_BOTH);
 $post = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id As id, title, name, date, text FROM news INNER JOIN users ON (author_id = users.id) WHERE news.id = ' . $_GET['id'] . ' ORDER BY news.id'), MYSQLI_BOTH);
-$meta = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id As id, title, name, date, text FROM news INNER JOIN users ON (author_id = users.id) WHERE news.id = ' . $_GET['id'] . ' ORDER BY news.id'), MYSQLI_BOTH);
-
-
+$description = mysqli_fetch_all(mysqli_query($database, 'SELECT description FROM join_table INNER JOIN categories ON (category_id = categories.id) WHERE news_id = ' . $_GET['id'] . ' ORDER BY news_id'), MYSQLI_BOTH);
+$keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_table INNER JOIN categories ON (join_table.category_id = categories.id) INNER JOIN keywords ON (categories.id = keywords.category_id) WHERE news_id = ' . $_GET['id'] . ' ORDER BY keywords.category_id'), MYSQLI_BOTH);
 ?>
 <!doctype html>
 <html lang="ru">
@@ -12,8 +11,20 @@ $meta = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id As id, title, n
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="Keywords" content="новости, политика, экономика, спорт, news board">
-    <meta name="description" content="Актуальные новости со всего света, собраные вместе для удобного восприятия.">
+    <meta name="Keywords" content="<?php
+    for ($i = 0; $i < count($keywords); $i++) {
+        if ($i == count($keywords) - 1)
+            echo $keywords[$i]['keyword'];
+        else
+            echo $keywords[$i]['keyword'] . ', ';
+
+    }
+    ?>">
+    <meta name="description" content=" <?php
+    for ($i = 0; $i < count($description); $i++) {
+        echo $description[$i]['description'] . ' ';
+    }
+    ?>">
 
     <title>News Board - Главная</title>
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
@@ -158,7 +169,7 @@ $meta = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id As id, title, n
                 <li class="post__last-news__item"
                     style="background: url('img/news/img<?php echo $news[0]['id'] ?>.webp') center
                             center no-repeat; background-size: cover">
-                    <a href="./post?id=<?php echo $news[0]['id']?>" class="post__last-news__item__link">
+                    <a href="./post?id=<?php echo $news[0]['id'] ?>" class="post__last-news__item__link">
                         <h3 class="post__last-news__item__title">
                             <?php echo $news[0]['title'] ?>
                         </h3>
@@ -167,7 +178,7 @@ $meta = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id As id, title, n
                 <li class="post__last-news__item"
                     style="background: url('img/news/img<?php echo $news[1]['id'] ?>.webp') center
                             center no-repeat; background-size: cover">
-                    <a href="./post?id=<?php echo $news[1]['id']?>" class="post__last-news__item__link">
+                    <a href="./post?id=<?php echo $news[1]['id'] ?>" class="post__last-news__item__link">
                         <h3 class="post__last-news__item__title">
                             <?php echo $news[1]['title'] ?>
                         </h3>
@@ -176,7 +187,7 @@ $meta = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id As id, title, n
                 <li class="post__last-news__item"
                     style="background: url('img/news/img<?php echo $news[2]['id'] ?>.webp') center
                             center no-repeat; background-size: cover">
-                    <a href="./post?id=<?php echo $news[2]['id']?>" class="post__last-news__item__link">
+                    <a href="./post?id=<?php echo $news[2]['id'] ?>" class="post__last-news__item__link">
                         <h3 class="post__last-news__item__title">
                             <?php echo $news[2]['title'] ?>
                         </h3>
@@ -185,7 +196,7 @@ $meta = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id As id, title, n
                 <li class="post__last-news__item"
                     style="background: url('img/news/img<?php echo $news[3]['id'] ?>.webp') center
                             center no-repeat; background-size: cover">
-                    <a href="./post?id=<?php echo $news[3]['id']?>" class="post__last-news__item__link">
+                    <a href="./post?id=<?php echo $news[3]['id'] ?>" class="post__last-news__item__link">
                         <h3 class="post__last-news__item__title">
                             <?php echo $news[3]['title'] ?>
                         </h3>
