@@ -101,13 +101,19 @@
         <div class="tabs__content">
             <h2>Предложить новость:</h2>
             <form action="./" method="post" id="add-new" class="add-new">
+                <label for="add-new-category">Выберите тему<span>*</span>:</label>
+                <select required type="text" name="add-new-category" id="add-new-category" class="form-input">
+                    <option value="politics">Политика</option>
+                    <option value="economy">Экономика</option>
+                    <option value="sport">Спорт</option>
+                </select>
                 <label for="add-new-title">Заголовок (Максимум 60 символов)<span>*</span>:</label>
                 <input required type="text" maxlength="60" name="add-new-title" id="add-new-title" class="form-input"
                        placeholder="Заголовок новости">
                 <label for="add-new-text">Текст<span>*</span>:</label>
                 <textarea required placeholder="Текст новости" name="add-new-text" id="add-new-text"
                           class="form-input"></textarea>
-                <label for="add-new-file">Загрузите картинку<span>*</span>:</label>
+                <label for="add-new-file">Загрузите картинку(только WebP)<span>*</span>:</label>
                 <div class="dropzone" id="add-new-file"></div>
                 <input type="submit" value="Отправить" class="add-new-send">
             </form>
