@@ -84,7 +84,7 @@ $keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_t
                                placeholder="Введите пароль">
                         <input required type="password" minlength="8" name="password2" class="password form-input"
                                placeholder="Повторите пароль">
-                        <input disabled class="remodal-confirm" type="submit" value="Зарегистрироваться">
+                        <input disabled class="remodal-confirm" type="submit" name="submit" value="Зарегистрироваться">
                     </form>
                 </div>
                 <a class="remodal-cancel" href="#">х</a>
@@ -193,3 +193,6 @@ $keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_t
 <script src="js/main.js"></script>
 </body>
 </html>
+<?php
+mysqli_close($database);
+?>
