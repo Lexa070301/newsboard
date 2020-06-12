@@ -66,38 +66,8 @@ $keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_t
                 <a href="./cabinet" class="cabinet__link">
                     <img src="img/icons/user.svg" alt="Личный кабинет">
                 </a>
-                <div class="cabinet__registration-modal" data-remodal-id="cabinet__registration__modal">
-                    <div class="cabinet__modal__container">
-                        <h2 class="cabinet__modal__title">Регистрация</h2>
-                        <form action="./" method="post" class="cabinet__modal__from cabinet__registration__form">
-                            <input required type="text" name="name" class="name form-input" placeholder="Ваше имя">
-                            <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
-                                   pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
-                            <input required type="password" name="password" class="password form-input"
-                                   placeholder="Введите пароль">
-                            <input required type="password" name="password2" class="password form-input"
-                                   placeholder="Повторите пароль">
-                            <input disabled class="remodal-confirm" type="submit" value="Зарегистрироваться">
-                        </form>
-                    </div>
-                    <a class="remodal-cancel" href="#">х</a>
-                </div>
-                <div class="cabinet__enter-modal" data-remodal-id="cabinet__enter__modal">
-                    <div class="cabinet__modal__container">
-                        <h2 class="cabinet__modal__title">Вход</h2>
-                        <form action="./" method="post" class="cabinet__modal__from cabinet__enter__form">
-                            <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
-                                   pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
-                            <input required type="password" name="password" class="password form-input"
-                                   placeholder="Введите пароль">
-                            <input disabled class="remodal-confirm" type="submit" value="Войти">
-                        </form>
-                    </div>
-                    <a class="remodal-cancel" href="#">х</a>
-                </div>
             </div>
         </div>
-
         <div class="cabinet">
             <button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
             <button class="cabinet__btn cabinet__enter">Войти</button>
@@ -107,7 +77,7 @@ $keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_t
             <div class="cabinet__registration-modal" data-remodal-id="cabinet__registration__modal">
                 <div class="cabinet__modal__container">
                     <h2 class="cabinet__modal__title">Регистрация</h2>
-                    <form action="./" method="post" class="cabinet__modal__from cabinet__registration__form">
+                    <form action="./check.php" method="post" class="cabinet__modal__from cabinet__registration__form">
                         <input required type="text" name="name" class="name form-input" placeholder="Ваше имя">
                         <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
                                pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
