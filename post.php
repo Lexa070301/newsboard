@@ -4,6 +4,38 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id
 $post = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id As id, title, name, date, text FROM news INNER JOIN users ON (author_id = users.id) WHERE news.id = ' . $_GET['id'] . ' ORDER BY news.id'), MYSQLI_BOTH);
 $description = mysqli_fetch_all(mysqli_query($database, 'SELECT description FROM join_table INNER JOIN categories ON (category_id = categories.id) WHERE news_id = ' . $_GET['id'] . ' ORDER BY news_id'), MYSQLI_BOTH);
 $keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_table INNER JOIN categories ON (join_table.category_id = categories.id) INNER JOIN keywords ON (categories.id = keywords.category_id) WHERE news_id = ' . $_GET['id'] . ' ORDER BY keywords.category_id'), MYSQLI_BOTH);
+if (isset($_POST["submit"])) {
+    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
+    $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
+    $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
+    $password = password_hash(md5(md5(md5($password))), PASSWORD_DEFAULT);
+    mysqli_query($database, "INSERT INTO users (name, email, password, type_id) VALUES ('$name', '$email', '$password', 2)");
+    $temp = 'registration';
+}
+?>
+<?php
+if (isset($_POST["submit-enter"])) {
+    $email = filter_var(trim($_POST['email-enter']), FILTER_SANITIZE_EMAIL);
+    $password = filter_var(trim($_POST['password-enter']), FILTER_SANITIZE_STRING);
+    $hesh = mysqli_fetch_all(mysqli_query($database, "SELECT * FROM users WHERE email = '$email'"), MYSQLI_BOTH);
+    if (count($hesh) == 0) {
+        $temp = 'not found';
+    } else
+        if (password_verify(md5(md5(md5($password))), $hesh[0]['password'])) {
+            setcookie('user', $hesh[0]['email'], time() + 3600, "/");
+            header("Location: ./post?id=" . $_GET['id']);
+        } else {
+            $temp = 'incorrect';
+        }
+}
+?>
+<?php
+if (isset($_POST["submit-out"])) {
+    $email = $_COOKIE['user'];
+    $array = mysqli_fetch_all(mysqli_query($database, "SELECT * FROM users WHERE email = '$email'"), MYSQLI_BOTH);
+    setcookie('user', $array[0]['email'], time() - 3600, "/");
+    header("Location: ./post?id=" . $_GET['id']);
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -35,6 +67,7 @@ $keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_t
     <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/remodal.css">
     <link rel="stylesheet" href="css/remodal-default-theme.css">
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -61,23 +94,39 @@ $keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_t
                 </ul>
             </nav>
             <div class="cabinet-mobile">
-                <button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
-                <button class="cabinet__btn cabinet__enter">Войти</button>
-                <a href="./cabinet" class="cabinet__link">
-                    <img src="img/icons/user.svg" alt="Личный кабинет">
-                </a>
+                <?php
+                if($_COOKIE['user'] == '') {
+                    echo '<button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
+                          <button class="cabinet__btn cabinet__enter">Войти</button>';
+                } else {
+                    echo '<form action="./post?id=' . $_GET['id'] . '" method="post">
+                            <input type="submit" name="submit-out" class="cabinet__btn cabinet__out" value="Выйти">
+                          </form>
+                          <a href="./cabinet" class="cabinet__link">
+                            <img src="img/icons/user.svg" alt="Личный кабинет">
+                          </a>';
+                }
+                ?>
             </div>
         </div>
         <div class="cabinet">
-            <button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
-            <button class="cabinet__btn cabinet__enter">Войти</button>
-            <a href="./cabinet" class="cabinet__link">
-                <img src="img/icons/user.svg" alt="Личный кабинет">
-            </a>
+            <?php
+            if($_COOKIE['user'] == '') {
+                echo '<button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
+                      <button class="cabinet__btn cabinet__enter">Войти</button>';
+            } else {
+                echo '<a href="./cabinet" class="cabinet__link">
+                        <img src="img/icons/user.svg" alt="Личный кабинет">
+                      </a>
+                      <form action="./post?id=' . $_GET['id'] . '" method="post">
+                        <input type="submit" name="submit-out" class="cabinet__btn cabinet__out" value="Выйти">
+                      </form>';
+            }
+            ?>
             <div class="cabinet__registration-modal" data-remodal-id="cabinet__registration__modal">
                 <div class="cabinet__modal__container">
                     <h2 class="cabinet__modal__title">Регистрация</h2>
-                    <form action="./check.php" method="post" class="cabinet__modal__from cabinet__registration__form">
+                    <form action="" method="post" class="cabinet__modal__from cabinet__registration__form">
                         <input required type="text" name="name" minlength="4" maxlength="50" class="name form-input" placeholder="Ваше имя">
                         <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail">
                         <input required type="password" minlength="8" name="password" class="password form-input"
@@ -92,12 +141,11 @@ $keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_t
             <div class="cabinet__enter-modal" data-remodal-id="cabinet__enter__modal">
                 <div class="cabinet__modal__container">
                     <h2 class="cabinet__modal__title">Вход</h2>
-                    <form action="./" method="post" class="cabinet__modal__from cabinet__enter__form">
-                        <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
-                               pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
-                        <input required type="password" name="password" class="password form-input"
+                    <form action="" method="post" class="cabinet__modal__from cabinet__enter__form">
+                        <input required type="email" name="email-enter" class="email form-input" placeholder="Ваш E-mail">
+                        <input required type="password" name="password-enter" class="password form-input"
                                placeholder="Введите пароль">
-                        <input disabled class="remodal-confirm" type="submit" value="Войти">
+                        <input disabled class="remodal-confirm" type="submit" name="submit-enter" value="Войти">
                     </form>
                 </div>
                 <a class="remodal-cancel" href="#">х</a>
@@ -187,6 +235,41 @@ $keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_t
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/jquery-migrate-1.2.1.min.js"></script>
 <script src="js/swiper.min.js"></script>
+<script src="js/sweetalert2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        <?php
+        if ($temp == 'not found') {
+            echo '
+                Swal.fire({
+                        title: \'Ошибка!\',
+                        text: \'Пользователь не найден\',
+                        icon: \'error\',
+                        confirmButtonText: \'OK\'
+                    })
+                ';
+        } elseif ($temp == 'incorrect') {
+            echo '
+               Swal.fire({
+                        title: \'Ошибка!\',
+                        text: \'Неверный пароль\',
+                        icon: \'error\',
+                        confirmButtonText: \'OK\'
+                    })
+                ';
+        } elseif ($temp == 'registration') {
+            echo '
+               Swal.fire({
+                        title: \'Поздравляем!\',
+                        text: \'Теперь вы можете войти в свой аккаунт\',
+                        icon: \'success\',
+                        confirmButtonText: \'OK\'
+                    })
+                ';
+        }
+        ?>
+    });
+</script>
 <script src="js/masonry.pkgd.min.js"></script>
 <script src="js/remodal.min.js"></script>
 <script src="js/drawer.min.js"></script>

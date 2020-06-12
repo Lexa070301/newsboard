@@ -7,7 +7,7 @@ if (isset($_POST["submit"])) {
     $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
     $password = password_hash(md5(md5(md5($password))), PASSWORD_DEFAULT);
     mysqli_query($database, "INSERT INTO users (name, email, password, type_id) VALUES ('$name', '$email', '$password', 2)");
-    header("Location: ./");
+    $temp = 'registration';
 }
 ?>
 <?php
@@ -16,13 +16,13 @@ if (isset($_POST["submit-enter"])) {
     $password = filter_var(trim($_POST['password-enter']), FILTER_SANITIZE_STRING);
     $hesh = mysqli_fetch_all(mysqli_query($database, "SELECT * FROM users WHERE email = '$email'"), MYSQLI_BOTH);
     if (count($hesh) == 0) {
-        echo 'Пользователь не найден';
+        $temp = 'not found';
     } else
         if (password_verify(md5(md5(md5($password))), $hesh[0]['password'])) {
             setcookie('user', $hesh[0]['email'], time() + 3600, "/");
             header("Location: ./");
         } else {
-            echo 'Пароль не верный';
+            $temp = 'incorrect';
         }
 }
 ?>
@@ -52,6 +52,7 @@ if (isset($_POST["submit-out"])) {
         <link rel="stylesheet" href="css/swiper.min.css">
         <link rel="stylesheet" href="css/remodal.css">
         <link rel="stylesheet" href="css/remodal-default-theme.css">
+        <link rel="stylesheet" href="css/sweetalert2.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -79,7 +80,7 @@ if (isset($_POST["submit-out"])) {
                 </nav>
                 <div class="cabinet-mobile">
                     <?php
-                    if($_COOKIE['user'] == '') {
+                    if ($_COOKIE['user'] == '') {
                         echo '<button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
                               <button class="cabinet__btn cabinet__enter">Войти</button>';
                     } else {
@@ -95,17 +96,17 @@ if (isset($_POST["submit-out"])) {
             </div>
             <div class="cabinet">
                 <?php
-                    if($_COOKIE['user'] == '') {
-                        echo '<button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
+                if ($_COOKIE['user'] == '') {
+                    echo '<button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
                               <button class="cabinet__btn cabinet__enter">Войти</button>';
-                    } else {
-                        echo '<a href="./cabinet" class="cabinet__link">
+                } else {
+                    echo '<a href="./cabinet" class="cabinet__link">
                                 <img src="img/icons/user.svg" alt="Личный кабинет">
                               </a>
                               <form action="./" method="post">
                                 <input type="submit" name="submit-out" class="cabinet__btn cabinet__out" value="Выйти">
                               </form>';
-                    }
+                }
                 ?>
                 <div class="cabinet__registration-modal" data-remodal-id="cabinet__registration__modal">
                     <div class="cabinet__modal__container">
@@ -127,10 +128,9 @@ if (isset($_POST["submit-out"])) {
                 <div class="cabinet__enter-modal" data-remodal-id="cabinet__enter__modal">
                     <div class="cabinet__modal__container">
                         <h2 class="cabinet__modal__title">Вход</h2>
-                        <form action="#" method="post" class="cabinet__modal__from cabinet__enter__form">
+                        <form action="./" method="post" class="cabinet__modal__from cabinet__enter__form">
                             <input required type="email" name="email-enter" class="email form-input"
-                                   placeholder="Ваш E-mail"
-                                   pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
+                                   placeholder="Ваш E-mail">
                             <input required type="password" name="password-enter" class="password form-input"
                                    placeholder="Введите пароль">
                             <input disabled class="remodal-confirm" type="submit" name="submit-enter" value="Войти">
@@ -236,6 +236,41 @@ if (isset($_POST["submit-out"])) {
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/swiper.min.js"></script>
+    <script src="js/sweetalert2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            <?php
+            if ($temp == 'not found') {
+                echo '
+                Swal.fire({
+                        title: \'Ошибка!\',
+                        text: \'Пользователь не найден\',
+                        icon: \'error\',
+                        confirmButtonText: \'OK\'
+                    })
+                ';
+            } elseif ($temp == 'incorrect') {
+                echo '
+               Swal.fire({
+                        title: \'Ошибка!\',
+                        text: \'Неверный пароль\',
+                        icon: \'error\',
+                        confirmButtonText: \'OK\'
+                    })
+                ';
+            } elseif ($temp == 'registration') {
+                echo '
+               Swal.fire({
+                        title: \'Поздравляем!\',
+                        text: \'Теперь вы можете войти в свой аккаунт\',
+                        icon: \'success\',
+                        confirmButtonText: \'OK\'
+                    })
+                ';
+            }
+            ?>
+        });
+    </script>
     <script src="js/masonry.pkgd.min.js"></script>
     <script src="js/remodal.min.js"></script>
     <script src="js/drawer.min.js"></script>

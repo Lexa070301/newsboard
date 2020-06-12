@@ -284,6 +284,9 @@
   .container {
     width: 95%;
   }
+  .post__date-and-author {
+    flex-direction: column;
+  }
   .last_news-container .swiper-slide {
     padding: 0px 20px 120px 20px;
   }

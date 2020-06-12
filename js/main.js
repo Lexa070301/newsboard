@@ -81,7 +81,7 @@ $(document).ready(function () {
         }
     });
     $('.cabinet__enter__form .form-input').on('keyup', function () {
-        if (($('.cabinet__enter__form [name="email"]').val() != '') && ($('.cabinet__enter__form [name="password"]').val() != '')) {
+        if (($('.cabinet__enter__form [type="email"]').val() != '') && ($('.cabinet__enter__form [type="password"]').val() != '')) {
             $('.cabinet__enter__form .remodal-confirm').removeAttr("disabled");
         }
     });
