@@ -1,6 +1,14 @@
 <?php
 include('connect.php');
 $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id'), MYSQLI_BOTH);
+if (isset($_POST['email'])) {
+    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
+    $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
+    $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
+    echo $email. '<br>';
+    echo $name. '<br>';
+    echo $password. '<br>';
+}
 ?>
 <!doctype html>
 <html lang="ru">
@@ -62,13 +70,12 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id
             <div class="cabinet__registration-modal" data-remodal-id="cabinet__registration__modal">
                 <div class="cabinet__modal__container">
                     <h2 class="cabinet__modal__title">Регистрация</h2>
-                    <form action="./check.php" method="post" class="cabinet__modal__from cabinet__registration__form">
-                        <input required type="text" name="name" class="name form-input" placeholder="Ваше имя">
-                        <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail"
-                               pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$">
-                        <input required type="password" name="password" class="password form-input"
+                    <form action="./" method="post" class="cabinet__modal__from cabinet__registration__form">
+                        <input required type="text" name="name" minlength="4" maxlength="50" class="name form-input" placeholder="Ваше имя">
+                        <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail">
+                        <input required type="password" minlength="8" name="password" class="password form-input"
                                placeholder="Введите пароль">
-                        <input required type="password" name="password2" class="password form-input"
+                        <input required type="password" minlength="8" name="password2" class="password form-input"
                                placeholder="Повторите пароль">
                         <input disabled class="remodal-confirm" type="submit" value="Зарегистрироваться">
                     </form>
