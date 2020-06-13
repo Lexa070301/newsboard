@@ -23,6 +23,7 @@ if (isset($_POST["submit-enter"])) {
     } else
         if (password_verify(md5(md5(md5($password))), $hesh[0]['password'])) {
             setcookie('user', $hesh[0]['email'], time() + 3600, "/");
+            setcookie('name', $hesh[0]['name'], time() + 3600, "/");
             header("Location: ./post?id=" . $_GET['id']);
         } else {
             $temp = 'incorrect';
@@ -34,6 +35,7 @@ if (isset($_POST["submit-out"])) {
     $email = $_COOKIE['user'];
     $array = mysqli_fetch_all(mysqli_query($database, "SELECT * FROM users WHERE email = '$email'"), MYSQLI_BOTH);
     setcookie('user', $array[0]['email'], time() - 3600, "/");
+    setcookie('name', $array[0]['name'], time() - 3600, "/");
     header("Location: ./post?id=" . $_GET['id']);
 }
 ?>

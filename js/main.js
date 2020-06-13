@@ -58,7 +58,6 @@ $(document).ready(function () {
         gutter: 30,
         fitWidth: true
     });
-
     $('.cabinet__registration').on('click', function () {
         $('[data-remodal-id=cabinet__registration__modal]').remodal().open();
     });
