@@ -516,6 +516,9 @@ footer {
   padding: 40px;
   background-color: white;
   border-right: 1px solid #ebebeb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .cabinet-main__content {
@@ -613,7 +616,21 @@ footer {
     box-shadow: 0px 0px 10px rgba($main_color, 0.7);
   }
 }
-
+.delete-form__btn {
+  color: #e10000;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border: 0;
+  outline: none;
+  font-weight: bold;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:focus {
+    text-decoration: underline;
+  }
+}
 #new-name {
   margin-bottom: 17px;
 }
@@ -770,8 +787,16 @@ footer {
 .drawer-nav {
   padding-top: 20px;
   z-index: 11;
-}
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 
+}
+.delete-form-drawer {
+  box-sizing: border-box;
+  padding: 20px;
+  padding-bottom: 40px;
+}
 .drawer-menu {
   box-sizing: border-box;
   padding: 20px;

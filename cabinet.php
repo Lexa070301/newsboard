@@ -77,12 +77,20 @@ if (isset($_POST["submit"])) {
     }
 }
 ?>
-
-
 <?php
 if (isset($_POST["submit-out"])) {
     $email = $_COOKIE['user'];
     $array = mysqli_fetch_all(mysqli_query($database, "SELECT * FROM users WHERE email = '$email'"), MYSQLI_BOTH);
+    setcookie('user', $array[0]['email'], time() - 3600, "/");
+    setcookie('name', $array[0]['name'], time() - 3600, "/");
+    header("Location: ./");
+}
+?>
+<?php
+if (isset($_POST["delete"])) {
+    $email = $_COOKIE['user'];
+    $array = mysqli_fetch_all(mysqli_query($database, "SELECT * FROM users WHERE email = '$email'"), MYSQLI_BOTH);
+    mysqli_query($database, "DELETE FROM users WHERE email = '$email'");
     setcookie('user', $array[0]['email'], time() - 3600, "/");
     setcookie('name', $array[0]['name'], time() - 3600, "/");
     header("Location: ./");
@@ -161,12 +169,20 @@ if (isset($_POST["submit-out"])) {
                 <li class="active">Учетная запись</li>
                 <li>Предложить новость</li>
             </ul>
+            <form action="" method="post" class="delete-form-drawer">
+                <input type="submit" name="delete" value="Удалить аккаунт"
+                               class="delete-form__btn">
+            </form>
         </div>
         <aside class="cabinet-main__sidebar">
             <ul class="tabs__caption">
                 <li class="active">Учетная запись</li>
                 <li>Предложить новость</li>
             </ul>
+            <form action="" method="post" class="delete-form">
+                <input type="submit" name="delete" value="Удалить аккаунт"
+                               class="delete-form__btn">
+            </form>
         </aside>
         <div class="cabinet-main__content">
             <h1 class="tabs__content__main-title">Добро пожаловать, <?php echo $_COOKIE['name'] ?></h1>
