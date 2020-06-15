@@ -1,27 +1,5 @@
-if (typeof Dropzone == 'function') {
-    Dropzone.autoDiscover = false;
-}
 $(document).ready(function () {
     $('.drawer').drawer();
-    if (typeof Dropzone == 'function') {
-        var myDropzone = new Dropzone('#add-new-file', {
-            url: './',
-            method: 'post',
-            maxFiles: 1,
-            dictFallbackMessage: 'Не поддерживается вашим браузером',
-            dictFileTooBig: 'Размер файла слишком велик',
-            dictInvalidFileType: 'Неправильный тип файла',
-            acceptedFiles: 'image/webp',
-            addRemoveLinks: true,
-        });
-        myDropzone._updateMaxFilesReachedClass()
-        myDropzone.on('maxfilesreached', function () {
-            myDropzone.removeEventListeners();
-        });
-        myDropzone.on('removedfile', function (file) {
-            myDropzone.setupEventListeners();
-        });
-    }
     $('.dz-button').text('Перетащите картинку сюда');
     $('ul.tabs__caption').on('click', 'li:not(.active)', function () {
         $(this)
@@ -31,7 +9,6 @@ $(document).ready(function () {
     $("#navToggle").click(function () {
         $(this).toggleClass("active");
         $(".overlay").toggleClass("open");
-        // this line ▼ prevents content scroll-behind
         $("body").toggleClass("locked");
     });
     $('.overlay').click(function () {
@@ -52,12 +29,6 @@ $(document).ready(function () {
             }
         });
     }
-    $('.board__grid').masonry({
-        itemSelector: '.board__grid__item',
-        columnWidth: 300,
-        gutter: 30,
-        fitWidth: true
-    });
     $('.cabinet__registration').on('click', function () {
         $('[data-remodal-id=cabinet__registration__modal]').remodal().open();
     });
@@ -83,5 +54,11 @@ $(document).ready(function () {
         if (($('.cabinet__enter__form [type="email"]').val() != '') && ($('.cabinet__enter__form [type="password"]').val() != '')) {
             $('.cabinet__enter__form .remodal-confirm').removeAttr("disabled");
         }
+    });
+    $('.board__grid').masonry({
+        itemSelector: '.board__grid__item',
+        columnWidth: 300,
+        gutter: 30,
+        fitWidth: true
     });
 });

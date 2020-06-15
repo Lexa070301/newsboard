@@ -1,11 +1,11 @@
 <?php
-include('connect.php');
-$news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news ORDER BY id'), MYSQLI_BOTH);
+include('functions.php');
+$news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news WHERE status = "accepted" ORDER BY id DESC'), MYSQLI_BOTH);
 if (isset($_POST["submit"])) {
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
     $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
-    $password = password_hash(md5(md5(md5($password))), PASSWORD_DEFAULT);
+    $password = password_hash(super_hash($password), PASSWORD_DEFAULT);
     mysqli_query($database, "INSERT INTO users (name, email, password, type_id) VALUES ('$name', '$email', '$password', 2)");
     $temp = 'registration';
 }
@@ -18,9 +18,11 @@ if (isset($_POST["submit-enter"])) {
     if (count($hesh) == 0) {
         $temp = 'not found';
     } else
-        if (password_verify(md5(md5(md5($password))), $hesh[0]['password'])) {
+        if (password_verify(super_hash($password), $hesh[0]['password'])) {
             setcookie('user', $hesh[0]['email'], time() + 3600, "/");
             setcookie('name', $hesh[0]['name'], time() + 3600, "/");
+            setcookie('id', $hesh[0]['id'], time() + 3600, "/");
+            setcookie('type_id', $hesh[0]['type_id'], time() + 3600, "/");
             header("Location: ./");
         } else {
             $temp = 'incorrect';
@@ -33,6 +35,8 @@ if (isset($_POST["submit-out"])) {
     $array = mysqli_fetch_all(mysqli_query($database, "SELECT * FROM users WHERE email = '$email'"), MYSQLI_BOTH);
     setcookie('user', $array[0]['email'], time() - 3600, "/");
     setcookie('name', $array[0]['name'], time() - 3600, "/");
+    setcookie('id', $array[0]['id'], time() - 3600, "/");
+    setcookie('type_id', $array[0]['type_id'], time() - 3600, "/");
     header("Location: ./");
 }
 ?>
@@ -209,7 +213,7 @@ if (isset($_POST["submit-out"])) {
             <div class="container">
                 <div class="board__grid">
                     <?php
-                    for ($i = 6; $i < 10; $i++) {
+                    for ($i = 6; $i < count($news); $i++) {
                         echo '<a href="./post?id=' . $news[$i]['id'] . '" class="board__grid__item">';
                         if (($i % 2 == 0) || ($i % 3 == 0)) {
                             echo '<img src="img/news/img' . $news[$i]['id'] . '.webp" alt="Картинка новости" class="board__grid__item__img">';

@@ -20,6 +20,9 @@
     max-width: 630px;
     width: 100%;
   }
+  #add-new-file {
+    background: none;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -244,6 +247,9 @@
   .footer__logo__img {
     margin-bottom: 30px;
   }
+  input[type=file i]::-webkit-file-upload-button {
+    font-size: 18px;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -278,6 +284,9 @@
       z-index: 1;
     }
   }
+  .edit {
+    width: 95%;
+  }
 }
 
 @media screen and (max-width: 450px) {
@@ -304,5 +313,16 @@
   }
   .remodal {
     padding: 25px;
+  }
+  .edit-new-img {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 350px) {
+  .edit-new-send {
+    width: 100%;
+  }
+  .edit__item {
+    width: 250px;
   }
 }

@@ -616,6 +616,7 @@ footer {
     box-shadow: 0px 0px 10px rgba($main_color, 0.7);
   }
 }
+
 .delete-form__btn {
   color: #e10000;
   background: none;
@@ -624,13 +625,16 @@ footer {
   border: 0;
   outline: none;
   font-weight: bold;
+
   &:hover {
     text-decoration: underline;
   }
+
   &:focus {
     text-decoration: underline;
   }
 }
+
 #new-name {
   margin-bottom: 17px;
 }
@@ -684,10 +688,12 @@ footer {
 #add-new-file {
   width: 100%;
   height: 220px;
-  background: url("../img/icons/upload.svg") 50% 70% no-repeat, rgba(0, 0, 0, 0);
+  background: url("../img/icons/upload.svg") 50% 50% no-repeat, rgba(0, 0, 0, 0);
   border: 1px solid $sub_color;
   border-radius: 20px;
   background-size: 12%;
+  cursor: pointer;
+  outline: none;
   @include tr;
 
   &:hover {
@@ -697,59 +703,25 @@ footer {
       transform: translateY(-10px);
     }
   }
-}
-
-.dz-max-files-reached {
-  background: url("../img/icons/ready.svg") 50% 50% no-repeat, rgba(0, 0, 0, 0) !important;
-  background-size: 12% !important;
-}
-
-.dz-started:not(.dz-max-files-reached) {
-  background: url("../img/icons/error.svg") 50% 50% no-repeat, rgba(0, 0, 0, 0) !important;
-  background-size: 12% !important;
-}
-
-.dz-preview {
-  background: none !important;
-  display: none;
-
-  &:hover {
-    .dz-image {
-      img {
-        @include tr;
-        filter: blur(2px) !important;
-      }
-    }
-  }
-}
-
-.dz-button {
-  font-size: 20px !important;
-  @include tr;
-}
-
-.dz-remove {
-  padding: 5px;
-  background: $main_color;
-  font-size: 14px !important;
-  text-decoration: none;
-  color: white;
-  border-radius: 20px;
-  margin-top: 5px;
-  @include tr;
-
-  &:hover {
-    text-decoration: none !important;
-    box-shadow: 0px 0px 5px rgba($main_color, 0.7);
-  }
 
   &:focus {
-    text-decoration: none !important;
+    outline: none;
   }
 }
 
-.dz-error-message {
-  margin-top: 30px;
+input[type="file" i]::-webkit-file-upload-button {
+  width: 65%;
+  height: 100%;
+  background: none;
+  cursor: pointer;
+  border: 0;
+  font-weight: bold;
+  font-size: 20px;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .add-new-send {
@@ -792,11 +764,13 @@ footer {
   flex-direction: column;
 
 }
+
 .delete-form-drawer {
   box-sizing: border-box;
   padding: 20px;
   padding-bottom: 40px;
 }
+
 .drawer-menu {
   box-sizing: border-box;
   padding: 20px;
@@ -821,6 +795,7 @@ footer {
   .container {
     max-width: 700px;
   }
+
   margin-bottom: 50px;
 }
 
@@ -881,5 +856,90 @@ footer {
     backdrop-filter: brightness(50%);
   }
 }
+//
+// Edit
+//
+.no-news {
+  font-size: 20px;
+  font-weight: bold;
+}
 
+.edit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.edit__item {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid $sub_color;
+  margin-bottom: 30px;
+}
+.edit-new {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .form-input {
+    width: 100%;
+  }
+  textarea {
+    resize: none;
+    height: 200px;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: "Gilroy", Helvetica, sans-serif;
+    &::-webkit-scrollbar {
+      width: 7px;
+      background: none;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+      background: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $main_color;
+      border-radius: 5px;
+    }
+  }
+
+  [type="file"] {
+    @include tr;
+    cursor: pointer;
+    &:hover {
+      height: 50px;
+    }
+  }
+}
+.edit-new-send {
+  margin-top: 10px;
+  width: 250px;
+  box-sizing: border-box;
+  height: 40px;
+  border-radius: 20px;
+  background-color: $main_color;
+  color: white;
+  cursor: pointer;
+  border: 0;
+  @include tr;
+  outline: none;
+  padding: 0px 20px;
+
+  &:hover {
+    background-color: $main_color;
+    box-shadow: 0px 0px 10px rgba($main_color, 0.7);
+  }
+
+  &:focus {
+    background-color: $main_color;
+    box-shadow: 0px 0px 10px rgba($main_color, 0.7);
+  }
+}
+.edit-new-img {
+  width: 300px;
+  margin-bottom: 10px;
+}
 @import "media";
