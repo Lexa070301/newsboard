@@ -287,7 +287,7 @@ input[disabled] {
 //
 .last_news {
   padding: 30px 0px;
-
+  padding-bottom: 0;
   .container {
     display: flex;
     justify-content: space-between;
@@ -394,6 +394,9 @@ input[disabled] {
 //
 // Board
 //
+.board {
+  padding-top: 30px;
+}
 .board__grid {
   width: 100%;
   margin: 0px auto;

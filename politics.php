@@ -1,9 +1,9 @@
 <?php
 include('functions.php');
-$news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news WHERE status = "accepted" ORDER BY id DESC'), MYSQLI_BOTH);
-$post = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id AS id, title, name, date, text, status FROM news INNER JOIN users ON (author_id = users.id) WHERE news.id = ' . $_GET['id'] . ' ORDER BY news.id DESC'), MYSQLI_BOTH);
-$description = mysqli_fetch_all(mysqli_query($database, 'SELECT description FROM join_table INNER JOIN categories ON (category_id = categories.id) WHERE news_id = ' . $_GET['id'] . ' ORDER BY news_id DESC'), MYSQLI_BOTH);
-$keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_table INNER JOIN categories ON (join_table.category_id = categories.id) INNER JOIN keywords ON (categories.id = keywords.category_id) WHERE news_id = ' . $_GET['id'] . ' ORDER BY keywords.category_id'), MYSQLI_BOTH);
+$news = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id AS id, title, date FROM news INNER JOIN join_table ON (news.id = news_id) INNER JOIN categories ON (category_id = categories.id) WHERE status = "accepted" AND name = "Политика" ORDER BY news.id DESC'), MYSQLI_BOTH);
+$description = mysqli_fetch_all(mysqli_query($database, 'SELECT description FROM categories WHERE name = "Политика"'), MYSQLI_BOTH);
+$keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM categories INNER JOIN keywords ON (categories.id = keywords.category_id) WHERE name = "Политика"'), MYSQLI_BOTH);
+
 if (isset($_POST["submit"])) {
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
@@ -26,7 +26,7 @@ if (isset($_POST["submit-enter"])) {
             setcookie('name', $hesh[0]['name'], time() + 3600, "/");
             setcookie('id', $hesh[0]['id'], time() + 3600, "/");
             setcookie('type_id', $hesh[0]['type_id'], time() + 3600, "/");
-            header("Location: ./post?id=" . $_GET['id']);
+            header("Location: ./politics");
         } else {
             $temp = 'incorrect';
         }
@@ -40,7 +40,7 @@ if (isset($_POST["submit-out"])) {
     setcookie('name', $array[0]['name'], time() - 3600, "/");
     setcookie('id', $array[0]['id'], time() - 3600, "/");
     setcookie('type_id', $array[0]['type_id'], time() - 3600, "/");
-    header("Location: ./post?id=" . $_GET['id']);
+    header("Location: ./politics");
 }
 ?>
     <!doctype html>
@@ -63,8 +63,7 @@ if (isset($_POST["submit-out"])) {
             echo $description[$i]['description'] . ' ';
         }
         ?>">
-
-        <title>News Board - <?php echo $post[0]['title']?></title>
+        <title>News Board - Политика</title>
         <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
@@ -74,7 +73,6 @@ if (isset($_POST["submit-out"])) {
         <link rel="stylesheet" href="css/remodal.css">
         <link rel="stylesheet" href="css/remodal-default-theme.css">
         <link rel="stylesheet" href="css/sweetalert2.min.css">
-        <link rel="stylesheet" href="css/jquery.fancybox.min.css">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -89,7 +87,7 @@ if (isset($_POST["submit-out"])) {
                         <li class="menu__list__item">
                             <a href="./" class="menu__list__item__link" role="menuitem">Главная</a>
                         </li>
-                        <li class="menu__list__item">
+                        <li class="menu__list__item menu__list__item-active">
                             <a href="./politics" class="menu__list__item__link" role="menuitem">Политика</a>
                         </li>
                         <li class="menu__list__item">
@@ -104,14 +102,14 @@ if (isset($_POST["submit-out"])) {
                     <?php
                     if ($_COOKIE['user'] == '') {
                         echo '<button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
-                          <button class="cabinet__btn cabinet__enter">Войти</button>';
+                              <button class="cabinet__btn cabinet__enter">Войти</button>';
                     } else {
-                        echo '<form action="./post?id=' . $_GET['id'] . '" method="post">
-                            <input type="submit" name="submit-out" class="cabinet__btn cabinet__out" value="Выйти">
-                          </form>
-                          <a href="./cabinet" class="cabinet__link">
-                            <img src="img/icons/user.svg" alt="Личный кабинет">
-                          </a>';
+                        echo '<form action="./" method="post">
+                                <input type="submit" name="submit-out" class="cabinet__btn cabinet__out" value="Выйти">
+                              </form>
+                              <a href="./cabinet" class="cabinet__link">
+                                <img src="img/icons/user.svg" alt="Личный кабинет">
+                              </a>';
                     }
                     ?>
                 </div>
@@ -120,20 +118,20 @@ if (isset($_POST["submit-out"])) {
                 <?php
                 if ($_COOKIE['user'] == '') {
                     echo '<button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
-                      <button class="cabinet__btn cabinet__enter">Войти</button>';
+                              <button class="cabinet__btn cabinet__enter">Войти</button>';
                 } else {
                     echo '<a href="./cabinet" class="cabinet__link">
-                        <img src="img/icons/user.svg" alt="Личный кабинет">
-                      </a>
-                      <form action="./post?id=' . $_GET['id'] . '" method="post">
-                        <input type="submit" name="submit-out" class="cabinet__btn cabinet__out" value="Выйти">
-                      </form>';
+                                <img src="img/icons/user.svg" alt="Личный кабинет">
+                              </a>
+                              <form action="./" method="post">
+                                <input type="submit" name="submit-out" class="cabinet__btn cabinet__out" value="Выйти">
+                              </form>';
                 }
                 ?>
                 <div class="cabinet__registration-modal" data-remodal-id="cabinet__registration__modal">
                     <div class="cabinet__modal__container">
                         <h2 class="cabinet__modal__title">Регистрация</h2>
-                        <form action="" method="post" class="cabinet__modal__from cabinet__registration__form">
+                        <form action="./" method="post" class="cabinet__modal__from cabinet__registration__form">
                             <input required type="text" name="name" minlength="4" maxlength="50" class="name form-input"
                                    placeholder="Ваше имя">
                             <input required type="email" name="email" class="email form-input" placeholder="Ваш E-mail">
@@ -150,7 +148,7 @@ if (isset($_POST["submit-out"])) {
                 <div class="cabinet__enter-modal" data-remodal-id="cabinet__enter__modal">
                     <div class="cabinet__modal__container">
                         <h2 class="cabinet__modal__title">Вход</h2>
-                        <form action="" method="post" class="cabinet__modal__from cabinet__enter__form">
+                        <form action="./" method="post" class="cabinet__modal__from cabinet__enter__form">
                             <input required type="email" name="email-enter" class="email form-input"
                                    placeholder="Ваш E-mail">
                             <input required type="password" name="password-enter" class="password form-input"
@@ -164,90 +162,25 @@ if (isset($_POST["submit-out"])) {
             <div class="navBurger" role="navigation" id="navToggle"></div>
         </div>
     </header>
-    <main class="post-main">
-        <section class="post">
+    <main>
+        <section class="board">
             <div class="container">
-                <h1 class="post__main-title">
+                <div class="board__grid">
                     <?php
-                    if (isset($post[0]['title']) && $post[0]['status'] == 'accepted')
-                        echo $post[0]['title'];
-                    else {
-                        echo '<br><br>' . 'Ошибка 404 "Страница не найдена"' . '<br><br>';
+                    for ($i = 0; $i < count($news); $i++) {
+                        echo '<a href="./post?id=' . $news[$i]['id'] . '" class="board__grid__item">';
+                        if (($i % 2 == 0) || ($i % 3 == 0)) {
+                            echo '<img src="img/news/img' . $news[$i]['id'] . '.webp" alt="Картинка новости" class="board__grid__item__img">';
+                            echo '<h3 class="board__grid__item__title-img">' . $news[$i]['title'] . '</h3>
+                    <span class="board__grid__item__date board__grid__item__date-img">' . $news[$i]['date'] . '</span></a>';
+                        } else {
+                            echo '<h3 class="board__grid__item__title">' . $news[$i]['title'] . '</h3>
+                    <span class="board__grid__item__date board__grid__item__date">' . $news[$i]['date'] . '</span></a>';
+                        }
+
                     }
                     ?>
-                </h1>
-                <div class="post__date-and-author">
-                <span class="post__date">
-                    <?php
-                    if (isset($post[0]['id']) && $post[0]['status'] == 'accepted') {
-                        echo $post[0]['date'];
-                    }
-                    ?>
-                </span>
-                    <span class="post__author">
-                    <?php
-                    if (isset($post[0]['id']) && $post[0]['status'] == 'accepted') {
-                        echo $post[0]['name'];
-                    }
-                    ?>
-                </span>
                 </div>
-                <?php
-                if (isset($post[0]['id']) && $post[0]['status'] == 'accepted')
-                    echo '<a class="fancybox" rel="group" href="./img/news/img' . $post[0]['id'] . '.webp" data-fancybox>
-                             <img src="img/news/img' . $post[0]['id'] . '.webp" class="post__img" alt="Картинка новости">
-                          </a>';
-                ?>
-                <p class="post__text">
-                    <?php
-                    if (isset($post[0]['id']) && $post[0]['status'] == 'accepted') {
-                        echo $post[0]['text'];
-                    }
-                    ?>
-                </p>
-            </div>
-        </section>
-        <section class="last-news">
-            <div class="container">
-                <h2 class="post__title">Последние новости</h2>
-                <ul class="post__last-news">
-                    <li class="post__last-news__item"
-                        style="background: url('img/news/img<?php echo $news[0]['id'] ?>.webp') center
-                                center no-repeat; background-size: cover">
-                        <a href="./post?id=<?php echo $news[0]['id'] ?>" class="post__last-news__item__link">
-                            <h3 class="post__last-news__item__title">
-                                <?php echo $news[0]['title'] ?>
-                            </h3>
-                        </a>
-                    </li>
-                    <li class="post__last-news__item"
-                        style="background: url('img/news/img<?php echo $news[1]['id'] ?>.webp') center
-                                center no-repeat; background-size: cover">
-                        <a href="./post?id=<?php echo $news[1]['id'] ?>" class="post__last-news__item__link">
-                            <h3 class="post__last-news__item__title">
-                                <?php echo $news[1]['title'] ?>
-                            </h3>
-                        </a>
-                    </li>
-                    <li class="post__last-news__item"
-                        style="background: url('img/news/img<?php echo $news[2]['id'] ?>.webp') center
-                                center no-repeat; background-size: cover">
-                        <a href="./post?id=<?php echo $news[2]['id'] ?>" class="post__last-news__item__link">
-                            <h3 class="post__last-news__item__title">
-                                <?php echo $news[2]['title'] ?>
-                            </h3>
-                        </a>
-                    </li>
-                    <li class="post__last-news__item"
-                        style="background: url('img/news/img<?php echo $news[3]['id'] ?>.webp') center
-                                center no-repeat; background-size: cover">
-                        <a href="./post?id=<?php echo $news[3]['id'] ?>" class="post__last-news__item__link">
-                            <h3 class="post__last-news__item__title">
-                                <?php echo $news[3]['title'] ?>
-                            </h3>
-                        </a>
-                    </li>
-                </ul>
             </div>
         </section>
     </main>
@@ -263,7 +196,6 @@ if (isset($_POST["submit-out"])) {
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/swiper.min.js"></script>
-    <script src="js/jquery.fancybox.min.js"></script>
     <script src="js/sweetalert2.min.js"></script>
     <script>
         $(document).ready(function () {
