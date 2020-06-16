@@ -216,7 +216,7 @@ if (isset($_POST["submit-out"])) {
                     for ($i = 6; $i < count($news); $i++) {
                         echo '<a href="./post?id=' . $news[$i]['id'] . '" class="board__grid__item">';
                         if (($i % 2 == 0) || ($i % 3 == 0)) {
-                            echo '<img src="#" data-src="img/news/img' . $news[$i]['id'] . '.webp" alt="Картинка новости" class="board__grid__item__img">';
+                            echo '<img src="#" data-src="img/news-small/img' . $news[$i]['id'] . '.webp" alt="Картинка новости" class="board__grid__item__img">';
                             echo '<h3 class="board__grid__item__title-img">' . $news[$i]['title'] . '</h3>
                     <span class="board__grid__item__date board__grid__item__date-img">' . $news[$i]['date'] . '</span></a>';
                         } else {
