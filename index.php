@@ -216,14 +216,13 @@ if (isset($_POST["submit-out"])) {
                     for ($i = 6; $i < count($news); $i++) {
                         echo '<a href="./post?id=' . $news[$i]['id'] . '" class="board__grid__item">';
                         if (($i % 2 == 0) || ($i % 3 == 0)) {
-                            echo '<img src="img/news/img' . $news[$i]['id'] . '.webp" alt="Картинка новости" class="board__grid__item__img">';
+                            echo '<img src="#" data-src="img/news/img' . $news[$i]['id'] . '.webp" alt="Картинка новости" class="board__grid__item__img">';
                             echo '<h3 class="board__grid__item__title-img">' . $news[$i]['title'] . '</h3>
                     <span class="board__grid__item__date board__grid__item__date-img">' . $news[$i]['date'] . '</span></a>';
                         } else {
                             echo '<h3 class="board__grid__item__title">' . $news[$i]['title'] . '</h3>
                     <span class="board__grid__item__date board__grid__item__date">' . $news[$i]['date'] . '</span></a>';
                         }
-
                     }
                     ?>
                 </div>
@@ -243,6 +242,9 @@ if (isset($_POST["submit-out"])) {
     <script src="js/jquery-migrate-1.2.1.min.js"></script>
     <script src="js/swiper.min.js"></script>
     <script src="js/sweetalert2.min.js"></script>
+    <script src="js/jquery.lazy.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
     <script>
         $(document).ready(function () {
             <?php
@@ -277,7 +279,6 @@ if (isset($_POST["submit-out"])) {
             ?>
         });
     </script>
-    <script src="js/masonry.pkgd.min.js"></script>
     <script src="js/remodal.min.js"></script>
     <script src="js/drawer.min.js"></script>
     <script src="js/main.js"></script>

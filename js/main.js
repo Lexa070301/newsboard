@@ -55,10 +55,19 @@ $(document).ready(function () {
             $('.cabinet__enter__form .remodal-confirm').removeAttr("disabled");
         }
     });
-    $('.board__grid').masonry({
-        itemSelector: '.board__grid__item',
-        columnWidth: 300,
+    var $grid = $('.board__grid').masonry({
         gutter: 30,
+        itemSelector: '.board__grid__item',
         fitWidth: true
+    });
+    $grid.imagesLoaded().progress(function () {
+        $grid.masonry('layout');
+    });
+    $(function () {
+        $('.board__grid__item__img').lazy({
+            afterLoad: function (element) {
+                $grid.masonry('layout');
+            }
+        });
     });
 });
