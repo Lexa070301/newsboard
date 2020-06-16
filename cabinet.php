@@ -118,6 +118,7 @@ if (isset($_POST["delete"])) {
 }
 ?>
 <?php
+
 if (isset($_POST["add-new-submit"])) {
     $category = filter_var(trim($_POST['add-new-category']), FILTER_SANITIZE_STRING);
     $title = filter_var(trim($_POST['add-new-title']), FILTER_SANITIZE_STRING);
@@ -133,6 +134,7 @@ if (isset($_POST["add-new-submit"])) {
         $_FILES['image']['name'] = 'img' . $news_id . '.webp';
         $file = "img/news/" . $_FILES['image']['name'];
         move_uploaded_file($_FILES['image']['tmp_name'], $file);
+        imagejpeg(resize_image($file, 300, 300), "img/news-small/" .$_FILES['image']['name']);
     }
     header("Location: ./cabinet");
 }
@@ -152,6 +154,7 @@ if (isset($_POST["edit-new-submit"])) {
             $_FILES['image']['name'] = 'img' . $hidden . '.webp';
             $file = "img/news/" . $_FILES['image']['name'];
             move_uploaded_file($_FILES['image']['tmp_name'], $file);
+            imagejpeg(resize_image($file, 300, 300), "img/news-small/" .$_FILES['image']['name']);
         }
     }
     header("Location: ./cabinet");
