@@ -7,7 +7,7 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news WHERE statu
 $category = mysqli_fetch_all(mysqli_query($database, 'SELECT categories.name AS name FROM join_table INNER JOIN categories ON (join_table.category_id = categories.id) INNER JOIN news ON (news.id = news_id) WHERE status = "on check" ORDER BY news.id'), MYSQLI_BOTH);
 $old_email = $_COOKIE['user'];
 $user = mysqli_fetch_all(mysqli_query($database, "SELECT * FROM users WHERE email = '$old_email'"), MYSQLI_BOTH);
-if (($_COOKIE['user']!=$user[0]['email'])||($_COOKIE['name']!=$user[0]['name'])||($_COOKIE['id']!=$user[0]['id'])||($_COOKIE['type_id']!=$user[0]['type_id'])) {
+if (($_COOKIE['user'] != $user[0]['email']) || ($_COOKIE['name'] != $user[0]['name']) || ($_COOKIE['id'] != $user[0]['id']) || ($_COOKIE['type_id'] != $user[0]['type_id'])) {
     unset($_COOKIE['user']);
     unset($_COOKIE['name']);
     unset($_COOKIE['id']);
@@ -134,9 +134,9 @@ if (isset($_POST["add-new-submit"])) {
         $_FILES['image']['name'] = 'img' . $news_id . '.webp';
         $file = "img/news/" . $_FILES['image']['name'];
         move_uploaded_file($_FILES['image']['tmp_name'], $file);
-        imagejpeg(resize_image($file, 300, 300), "img/news-small/" .$_FILES['image']['name']);
+        imagejpeg(resize_image($file, 300, 300), "img/news-small/" . $_FILES['image']['name']);
     }
-    header("Location: ./cabinet");
+    header("Location: ./cabinet.php");
 }
 ?>
 <?php
@@ -154,10 +154,10 @@ if (isset($_POST["edit-new-submit"])) {
             $_FILES['image']['name'] = 'img' . $hidden . '.webp';
             $file = "img/news/" . $_FILES['image']['name'];
             move_uploaded_file($_FILES['image']['tmp_name'], $file);
-            imagejpeg(resize_image($file, 300, 300), "img/news-small/" .$_FILES['image']['name']);
+            imagejpeg(resize_image($file, 300, 300), "img/news-small/" . $_FILES['image']['name']);
         }
     }
-    header("Location: ./cabinet");
+    header("Location: ./cabinet.php");
 }
 ?>
 <!doctype html>
@@ -193,13 +193,13 @@ if (isset($_POST["edit-new-submit"])) {
                         <a href="./" class="menu__list__item__link" role="menuitem">Главная</a>
                     </li>
                     <li class="menu__list__item">
-                        <a href="./politics" class="menu__list__item__link" role="menuitem">Политика</a>
+                        <a href="./politics.php" class="menu__list__item__link" role="menuitem">Политика</a>
                     </li>
                     <li class="menu__list__item">
-                        <a href="./economy" class="menu__list__item__link" role="menuitem">Экономика</a>
+                        <a href="./economy.php" class="menu__list__item__link" role="menuitem">Экономика</a>
                     </li>
                     <li class="menu__list__item">
-                        <a href="./sport" class="menu__list__item__link" role="menuitem">Спорт</a>
+                        <a href="./sport.php" class="menu__list__item__link" role="menuitem">Спорт</a>
                     </li>
                 </ul>
             </nav>
@@ -289,7 +289,7 @@ if (isset($_POST["edit-new-submit"])) {
         </div>
         <div class="tabs__content">
             <h2>Предложить новость:</h2>
-            <form action="" method="post" id="add-new" class="add-new" enctype="multipart/form-data">
+            <form action="./cabinet.php" method="post" id="add-new" class="add-new" enctype="multipart/form-data">
                 <label for="add-new-category">Выберите тему<span>*</span>:</label>
                 <select required name="add-new-category" id="add-new-category"
                         class="form-input">
@@ -305,7 +305,7 @@ if (isset($_POST["edit-new-submit"])) {
                 <textarea required minlength="500" placeholder="Текст новости" name="add-new-text" id="add-new-text"
                           class="form-input"></textarea>
                 <label for="add-new-file">Загрузите картинку(только WebP)<span>*</span>:</label>
-                <input required type="file" name="image" id="add-new-file" accept="image/webp">
+                <input type="file" name="image" id="add-new-file" accept="image/webp">
                 <input type="submit" name="add-new-submit" value="Отправить" class="add-new-send">
             </form>
         </div>
@@ -330,27 +330,27 @@ if (isset($_POST["edit-new-submit"])) {
                                     break;
                             }
                             echo '<li class="edit__item">
-                                <form action="" method="post" class="edit-new" enctype="multipart/form-data">
-                                    <select required name="edit-new-category"
-                                            class="form-input">
-                                        <option value="Политика" ' . $selected1 . '>Политика</option>
-                                        <option value="Экономика" ' . $selected2 . '>Экономика</option>
-                                        <option value="Спорт" ' . $selected3 . '>Спорт</option>
-                                    </select>
-                                    <input required type="text" maxlength="60" name="edit-new-title" 
-                                           class="form-input"
-                                           value="' . $news[$i]["title"] . '"
-                                           placeholder="Заголовок новости">
-                                    <textarea required minlength="500" placeholder="Текст новости" name="edit-new-text"
-                                              class="form-input">' . $news[$i]["text"] . '</textarea>
-                                    <a class="fancybox" rel="group" href="./img/news/img' . $news[$i]["id"] . '.webp" data-fancybox>
-                                        <img src="./img/news/img' . $news[$i]["id"] . '.webp" alt="Картинка новости" class="edit-new-img">
-                                    </a>
-                                    <input type="file" class="form-input" name="image" accept="image/webp">
-                                    <input type="hidden" name="edit-new-hidden" value="' . $news[$i]["id"] . '">
-                                    <input type="submit" name="edit-new-submit" value="Отправить" class="edit-new-send">
-                                </form>
-                            </li>';
+                                        <form action="./cabinet.php" method="post" class="edit-new" enctype="multipart/form-data">
+                                            <select required name="edit-new-category"
+                                                    class="form-input">
+                                                <option value="Политика" ' . $selected1 . '>Политика</option>
+                                                <option value="Экономика" ' . $selected2 . '>Экономика</option>
+                                                <option value="Спорт" ' . $selected3 . '>Спорт</option>
+                                            </select>
+                                            <input required type="text" maxlength="60" name="edit-new-title"
+                                                   class="form-input"
+                                                   value="' . $news[$i]["title"] . '"
+                                                   placeholder="Заголовок новости">
+                                            <textarea required minlength="500" placeholder="Текст новости" name="edit-new-text"
+                                                      class="form-input">' . $news[$i]["text"] . '</textarea>
+                                            <a class="fancybox" rel="group" href="./img/news/img' . $news[$i]["id"] . '.webp" data-fancybox>
+                                                <img src="./img/news/img' . $news[$i]["id"] . '.webp" alt="Картинка новости" class="edit-new-img">
+                                            </a>
+                                            <input type="file" class="form-input" name="image" accept="image/webp">
+                                            <input type="hidden" name="edit-new-hidden" value="' . $news[$i]["id"] . '">
+                                            <input type="submit" name="edit-new-submit" value="Отправить" class="edit-new-send">
+                                        </form>
+                                    </li>';
                         }
                     } else {
                         echo '<li class="no-news">Новостей пока нет</li>';

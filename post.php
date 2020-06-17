@@ -26,7 +26,7 @@ if (isset($_POST["submit-enter"])) {
             setcookie('name', $hesh[0]['name'], time() + 3600, "/");
             setcookie('id', $hesh[0]['id'], time() + 3600, "/");
             setcookie('type_id', $hesh[0]['type_id'], time() + 3600, "/");
-            header("Location: ./post?id=" . $_GET['id']);
+            header("Location: ./post.php?id=" . $_GET['id'] . "");
         } else {
             $temp = 'incorrect';
         }
@@ -40,7 +40,7 @@ if (isset($_POST["submit-out"])) {
     setcookie('name', $array[0]['name'], time() - 3600, "/");
     setcookie('id', $array[0]['id'], time() - 3600, "/");
     setcookie('type_id', $array[0]['type_id'], time() - 3600, "/");
-    header("Location: ./post?id=" . $_GET['id']);
+    header("Location: ./post.php?id=" . $_GET['id'] . "");
 }
 ?>
     <!doctype html>
@@ -64,7 +64,7 @@ if (isset($_POST["submit-out"])) {
         }
         ?>">
 
-        <title>News Board - <?php echo $post[0]['title']?></title>
+        <title>News Board - <?php echo $post[0]['title'] ?></title>
         <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
@@ -90,13 +90,13 @@ if (isset($_POST["submit-out"])) {
                             <a href="./" class="menu__list__item__link" role="menuitem">Главная</a>
                         </li>
                         <li class="menu__list__item">
-                            <a href="./politics" class="menu__list__item__link" role="menuitem">Политика</a>
+                            <a href="./politics.php" class="menu__list__item__link" role="menuitem">Политика</a>
                         </li>
                         <li class="menu__list__item">
-                            <a href="./economy" class="menu__list__item__link" role="menuitem">Экономика</a>
+                            <a href="./economy.php" class="menu__list__item__link" role="menuitem">Экономика</a>
                         </li>
                         <li class="menu__list__item">
-                            <a href="./sport" class="menu__list__item__link" role="menuitem">Спорт</a>
+                            <a href="./sport.php" class="menu__list__item__link" role="menuitem">Спорт</a>
                         </li>
                     </ul>
                 </nav>
@@ -109,7 +109,7 @@ if (isset($_POST["submit-out"])) {
                         echo '<form action="./post?id=' . $_GET['id'] . '" method="post">
                             <input type="submit" name="submit-out" class="cabinet__btn cabinet__out" value="Выйти">
                           </form>
-                          <a href="./cabinet" class="cabinet__link">
+                          <a href="./cabinet.php" class="cabinet__link">
                             <img src="img/icons/user.svg" alt="Личный кабинет">
                           </a>';
                     }
@@ -122,7 +122,7 @@ if (isset($_POST["submit-out"])) {
                     echo '<button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
                       <button class="cabinet__btn cabinet__enter">Войти</button>';
                 } else {
-                    echo '<a href="./cabinet" class="cabinet__link">
+                    echo '<a href="./cabinet.php" class="cabinet__link">
                         <img src="img/icons/user.svg" alt="Личный кабинет">
                       </a>
                       <form action="./post?id=' . $_GET['id'] . '" method="post">
@@ -214,7 +214,7 @@ if (isset($_POST["submit-out"])) {
                     <li class="post__last-news__item"
                         style="background: url('img/news/img<?php echo $news[0]['id'] ?>.webp') center
                                 center no-repeat; background-size: cover">
-                        <a href="./post?id=<?php echo $news[0]['id'] ?>" class="post__last-news__item__link">
+                        <a href="./post.php?id=<?php echo $news[0]['id'] ?>" class="post__last-news__item__link">
                             <h3 class="post__last-news__item__title">
                                 <?php echo $news[0]['title'] ?>
                             </h3>
@@ -223,7 +223,7 @@ if (isset($_POST["submit-out"])) {
                     <li class="post__last-news__item"
                         style="background: url('img/news/img<?php echo $news[1]['id'] ?>.webp') center
                                 center no-repeat; background-size: cover">
-                        <a href="./post?id=<?php echo $news[1]['id'] ?>" class="post__last-news__item__link">
+                        <a href="./post.php?id=<?php echo $news[1]['id'] ?>" class="post__last-news__item__link">
                             <h3 class="post__last-news__item__title">
                                 <?php echo $news[1]['title'] ?>
                             </h3>
@@ -232,7 +232,7 @@ if (isset($_POST["submit-out"])) {
                     <li class="post__last-news__item"
                         style="background: url('img/news/img<?php echo $news[2]['id'] ?>.webp') center
                                 center no-repeat; background-size: cover">
-                        <a href="./post?id=<?php echo $news[2]['id'] ?>" class="post__last-news__item__link">
+                        <a href="./post.php?id=<?php echo $news[2]['id'] ?>" class="post__last-news__item__link">
                             <h3 class="post__last-news__item__title">
                                 <?php echo $news[2]['title'] ?>
                             </h3>
@@ -241,7 +241,7 @@ if (isset($_POST["submit-out"])) {
                     <li class="post__last-news__item"
                         style="background: url('img/news/img<?php echo $news[3]['id'] ?>.webp') center
                                 center no-repeat; background-size: cover">
-                        <a href="./post?id=<?php echo $news[3]['id'] ?>" class="post__last-news__item__link">
+                        <a href="./post.php?id=<?php echo $news[3]['id'] ?>" class="post__last-news__item__link">
                             <h3 class="post__last-news__item__title">
                                 <?php echo $news[3]['title'] ?>
                             </h3>

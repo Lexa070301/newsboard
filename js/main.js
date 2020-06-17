@@ -60,14 +60,16 @@ $(document).ready(function () {
         itemSelector: '.board__grid__item',
         fitWidth: true
     });
-    $grid.imagesLoaded().progress(function () {
-        $grid.masonry('layout');
-    });
-    $(function () {
-        $('.board__grid__item__img').lazy({
-            afterLoad: function (element) {
-                $grid.masonry('layout');
-            }
+    if (typeof $grid.imagesLoaded == 'function') {
+        $grid.imagesLoaded().progress(function () {
+            $grid.masonry('layout');
         });
-    });
+        $(function () {
+            $('.board__grid__item__img').lazy({
+                afterLoad: function (element) {
+                    $grid.masonry('layout');
+                }
+            });
+        });
+    }
 });

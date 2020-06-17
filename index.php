@@ -74,13 +74,13 @@ if (isset($_POST["submit-out"])) {
                             <a href="./" class="menu__list__item__link" role="menuitem">Главная</a>
                         </li>
                         <li class="menu__list__item">
-                            <a href="./politics" class="menu__list__item__link" role="menuitem">Политика</a>
+                            <a href="./politics.php" class="menu__list__item__link" role="menuitem">Политика</a>
                         </li>
                         <li class="menu__list__item">
-                            <a href="./economy" class="menu__list__item__link" role="menuitem">Экономика</a>
+                            <a href="./economy.php" class="menu__list__item__link" role="menuitem">Экономика</a>
                         </li>
                         <li class="menu__list__item">
-                            <a href="./sport" class="menu__list__item__link" role="menuitem">Спорт</a>
+                            <a href="./sport.php" class="menu__list__item__link" role="menuitem">Спорт</a>
                         </li>
                     </ul>
                 </nav>
@@ -93,7 +93,7 @@ if (isset($_POST["submit-out"])) {
                         echo '<form action="./" method="post">
                                 <input type="submit" name="submit-out" class="cabinet__btn cabinet__out" value="Выйти">
                               </form>
-                              <a href="./cabinet" class="cabinet__link">
+                              <a href="./cabinet.php" class="cabinet__link">
                                 <img src="img/icons/user.svg" alt="Личный кабинет">
                               </a>';
                     }
@@ -106,7 +106,7 @@ if (isset($_POST["submit-out"])) {
                     echo '<button class="cabinet__btn cabinet__registration">Зарегистрироваться</button>
                               <button class="cabinet__btn cabinet__enter">Войти</button>';
                 } else {
-                    echo '<a href="./cabinet" class="cabinet__link">
+                    echo '<a href="./cabinet.php" class="cabinet__link">
                                 <img src="img/icons/user.svg" alt="Личный кабинет">
                               </a>
                               <form action="./" method="post">
@@ -153,7 +153,7 @@ if (isset($_POST["submit-out"])) {
             <div class="container">
                 <div class="last_news-container">
                     <div class="swiper-wrapper">
-                        <a href="./post?id=<?php echo $news[0]['id'] ?>" class="swiper-slide last_news__slide-1"
+                        <a href="./post.php?id=<?php echo $news[0]['id'] ?>" class="swiper-slide last_news__slide-1"
                            style="background: url('img/news/img<?php echo $news[0]['id'] ?>.webp') center center no-repeat;
                                    background-size: cover">
                             <h2 class="last_news__slide__title">
@@ -161,7 +161,7 @@ if (isset($_POST["submit-out"])) {
                             </h2>
                             <span class="last_news__date"><?php echo $news[0]['date']; ?></span>
                         </a>
-                        <a href="./post?id=<?php echo $news[1]['id'] ?>" class="swiper-slide last_news__slide-2"
+                        <a href="./post.php?id=<?php echo $news[1]['id'] ?>" class="swiper-slide last_news__slide-2"
                            style="background: url('img/news/img<?php echo $news[1]['id'] ?>.webp') center center no-repeat;
                                    background-size: cover">
                             <h2 class="last_news__slide__title">
@@ -169,7 +169,7 @@ if (isset($_POST["submit-out"])) {
                             </h2>
                             <span class="last_news__date"><?php echo $news[1]['date']; ?></span>
                         </a>
-                        <a href="./post?id=<?php echo $news[2]['id'] ?>" class="swiper-slide last_news__slide-3"
+                        <a href="./post.php?id=<?php echo $news[2]['id'] ?>" class="swiper-slide last_news__slide-3"
                            style="background: url('img/news/img<?php echo $news[2]['id'] ?>.webp') center center no-repeat;
                                    background-size: cover">
                             <h2 class="last_news__slide__title">
@@ -183,7 +183,7 @@ if (isset($_POST["submit-out"])) {
                 </div>
                 <ul class="right_news">
                     <li class="right_news__item">
-                        <a href="./post?id=<?php echo $news[3]['id'] ?>" class="right_news__item__link">
+                        <a href="./post.php?id=<?php echo $news[3]['id'] ?>" class="right_news__item__link">
                             <h3 class="right_news__item__link__title">
                                 <?php echo $news[3]['title']; ?>
                             </h3>
@@ -191,7 +191,7 @@ if (isset($_POST["submit-out"])) {
                         </a>
                     </li>
                     <li class="right_news__item">
-                        <a href="./post?id=<?php echo $news[4]['id'] ?>" class="right_news__item__link">
+                        <a href="./post.php?id=<?php echo $news[4]['id'] ?>" class="right_news__item__link">
                             <h3 class="right_news__item__link__title">
                                 <?php echo $news[4]['title']; ?>
                             </h3>
@@ -199,7 +199,7 @@ if (isset($_POST["submit-out"])) {
                         </a>
                     </li>
                     <li class="right_news__item">
-                        <a href="./post?id=<?php echo $news[5]['id'] ?>" class="right_news__item__link">
+                        <a href="./post.php?id=<?php echo $news[5]['id'] ?>" class="right_news__item__link">
                             <h3 class="right_news__item__link__title">
                                 <?php echo $news[5]['title']; ?>
                             </h3>
@@ -214,7 +214,7 @@ if (isset($_POST["submit-out"])) {
                 <div class="board__grid">
                     <?php
                     for ($i = 6; $i < count($news); $i++) {
-                        echo '<a href="./post?id=' . $news[$i]['id'] . '" class="board__grid__item">';
+                        echo '<a href="./post.php?id=' . $news[$i]['id'] . '" class="board__grid__item">';
                         if (($i % 2 == 0) || ($i % 3 == 0)) {
                             echo '<img src="#" data-src="img/news-small/img' . $news[$i]['id'] . '.webp" alt="Картинка новости" class="board__grid__item__img">';
                             echo '<h3 class="board__grid__item__title-img">' . $news[$i]['title'] . '</h3>
