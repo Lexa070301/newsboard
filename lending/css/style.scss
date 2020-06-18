@@ -1,4 +1,5 @@
 @import "fonts";
+
 $main_color: #FF7400;
 $sub_color: #009999;
 $dark: #323232;
@@ -15,6 +16,7 @@ body {
   margin: 0;
   color: $dark;
 }
+
 body::-webkit-scrollbar {
   width: 7px;
   background: none;
@@ -28,6 +30,7 @@ body::-webkit-scrollbar-thumb {
   background-color: $main_color;
   border-radius: 5px;
 }
+
 .container {
   width: 1170px;
   margin: 0px auto;
@@ -47,6 +50,7 @@ header {
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
+
   .container {
     display: flex;
     justify-content: center;
@@ -55,10 +59,45 @@ header {
     flex-direction: column;
   }
 }
+
+.header__title-wrap {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .header__title {
   color: white;
   font-size: 56px;
+  font-weight: bold;
 }
+
+.header__menu {
+  position: static !important;
+}
+
+.header__menu__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.header__menu__link {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  @include tr;
+  &:hover {
+    color: $main_color;
+    transform: translateY(5px);
+  }
+}
+
 main {
   height: 1000px;
 }
