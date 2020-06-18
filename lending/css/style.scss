@@ -6,11 +6,19 @@ body {
   padding: 0;
   margin: 0;
 }
+.container {
+  width: 1170px;
+  margin: 0px auto;
+}
 ul, ol, h1, h2, h3, h4, a {
   margin: 0px auto;
   padding: 0;
 }
 ul, ol {
+list-style: none;
+}
+header {
 
 }
+
 @import "media";
