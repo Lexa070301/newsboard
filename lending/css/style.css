@@ -140,6 +140,36 @@ header .container {
   transform: translateY(5px);
 }
 
-main {
-  height: 1000px;
+.goal__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.goal__text {
+  flex: 1;
+  margin-right: 50px;
+  line-height: 1.5em;
+}
+
+#goal__img-scene {
+  flex: 1;
+}
+
+.goal__img-border {
+  height: 213px;
+  width: 400px;
+  border: 3px dotted #009999;
+}
+
+.goal__img {
+  width: 400px;
+}
+
+.technologies {
+  background-color: #f8f8f8;
+}
+
+.technologies__content {
+  display: flex;
+  justify-content: space-between;
 }

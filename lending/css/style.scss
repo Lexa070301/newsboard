@@ -40,6 +40,7 @@ body::-webkit-scrollbar-thumb {
   color: $dark;
   font-size: 36px;
   font-weight: bold;
+
   &:after {
     margin-top: 15px;
     display: block;
@@ -50,7 +51,8 @@ body::-webkit-scrollbar-thumb {
     background-color: $sub_color;
     margin-bottom: 30px;
   }
-  &:before{
+
+  &:before {
     margin-bottom: 7px;
     display: block;
     content: "";
@@ -60,9 +62,11 @@ body::-webkit-scrollbar-thumb {
     background-color: $main_color;
   }
 }
+
 section {
   padding: 70px 0px;
 }
+
 ul, ol, h1, h2, h3, h4, a {
   margin: 0px auto;
   padding: 0;
@@ -119,17 +123,45 @@ header {
   font-weight: bold;
   color: white;
   @include tr;
+
   &:hover {
     color: $main_color;
     transform: translateY(5px);
   }
 }
+
 .goal__content {
   display: flex;
   justify-content: space-between;
 }
-main {
-  height: 1000px;
+
+.goal__text {
+  flex: 1;
+  margin-right: 50px;
+  line-height: 1.5em;
+}
+
+#goal__img-scene {
+  flex: 1;
+}
+
+.goal__img-border {
+  height: 213px;
+  width: 400px;
+  border: 3px dotted $sub_color;
+}
+
+.goal__img {
+  width: 400px;
+}
+
+.technologies {
+  background-color: #f8f8f8;
+}
+
+.technologies__list {
+  display: flex;
+  justify-content: space-between;
 }
 
 @import "media";
