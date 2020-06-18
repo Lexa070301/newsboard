@@ -50,6 +50,35 @@ body::-webkit-scrollbar-thumb {
   margin: 0px auto;
 }
 
+.common-title {
+  color: #323232;
+  font-size: 36px;
+  font-weight: bold;
+}
+.common-title:after {
+  margin-top: 15px;
+  display: block;
+  content: "";
+  width: 100px;
+  height: 3px;
+  border-radius: 3px;
+  background-color: #009999;
+  margin-bottom: 30px;
+}
+.common-title:before {
+  margin-bottom: 7px;
+  display: block;
+  content: "";
+  width: 100px;
+  height: 3px;
+  border-radius: 3px;
+  background-color: #FF7400;
+}
+
+section {
+  padding: 70px 0px;
+}
+
 ul, ol, h1, h2, h3, h4, a {
   margin: 0px auto;
   padding: 0;

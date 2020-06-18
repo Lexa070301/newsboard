@@ -36,6 +36,33 @@ body::-webkit-scrollbar-thumb {
   margin: 0px auto;
 }
 
+.common-title {
+  color: $dark;
+  font-size: 36px;
+  font-weight: bold;
+  &:after {
+    margin-top: 15px;
+    display: block;
+    content: "";
+    width: 100px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: $sub_color;
+    margin-bottom: 30px;
+  }
+  &:before{
+    margin-bottom: 7px;
+    display: block;
+    content: "";
+    width: 100px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: $main_color;
+  }
+}
+section {
+  padding: 70px 0px;
+}
 ul, ol, h1, h2, h3, h4, a {
   margin: 0px auto;
   padding: 0;
@@ -97,7 +124,10 @@ header {
     transform: translateY(5px);
   }
 }
-
+.goal__content {
+  display: flex;
+  justify-content: space-between;
+}
 main {
   height: 1000px;
 }
