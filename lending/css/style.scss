@@ -17,6 +17,12 @@ body {
   color: $dark;
 }
 
+p, span, a, h1, h2, h3, h4, h5, li, div, img, body, main, header, footer {
+  &::selection {
+    background-color: $sub_color;
+  }
+}
+
 body::-webkit-scrollbar {
   width: 7px;
   background: none;
@@ -68,7 +74,7 @@ section {
 }
 
 ul, ol, h1, h2, h3, h4, a {
-  margin: 0px auto;
+  margin: 0px;
   padding: 0;
 }
 
@@ -177,6 +183,7 @@ header {
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
     background-color: white;
     transform: translateY(-10px);
+
     .technologies__list__text {
       opacity: 1;
     }
@@ -192,6 +199,7 @@ header {
   width: 100%;
   text-decoration: none;
 }
+
 .technologies__list__text {
   text-align: center;
   color: $dark;
@@ -199,6 +207,7 @@ header {
   @include tr;
   opacity: 0;
 }
+
 .technologies__list__img {
   width: 150px;
   @include tr;
@@ -206,6 +215,46 @@ header {
 
 .technologies__list__img-big {
   width: 250px;
+}
+
+.developer {
+  .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+}
+
+.developer__content {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+}
+
+.developer__content__name {
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.developer__content__group {
+  margin-bottom: 10px;
+}
+
+.developer__content__vk__img {
+  width: 20px;
+  @include tr;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.developer__content__text {
+  line-height: 1.5em;
 }
 
 @import "media";
