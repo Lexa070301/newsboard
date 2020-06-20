@@ -4,7 +4,7 @@ $(document).ready(function () {
     var img_scene = document.getElementById('goal__img-scene');
     var parallaxInstance = new Parallax(img_scene);
     new WOW().init();
-    $('.header__menu__link').on( 'click', function(){
+    $('.header__menu__link, .footer__logo').on( 'click', function(){
         var el = $(this);
         var dest = el.attr('href'); // получаем направление
         if(dest !== undefined && dest !== '') { // проверяем существование

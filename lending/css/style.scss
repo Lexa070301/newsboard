@@ -150,6 +150,9 @@ header {
 
 #goal__img-scene {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .goal__img-border {
@@ -160,6 +163,8 @@ header {
 
 .goal__img {
   width: 400px;
+  margin-top: -20px;
+  margin-left: -20px;
 }
 
 .technologies {
@@ -274,6 +279,44 @@ header {
 .gallery__grid__item {
   margin-bottom: 30px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  @include tr;
+
+  &:hover, &:focus {
+    transform: translateY(-10px);
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+footer {
+  background-color: $dark;
+  height: 80px;
+  color: white;
+  box-sizing: border-box;
+  padding: 20px 0px;
+  .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.footer__privacy-policy {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.footer__logo {
+  display: block;
+  height: 100%;
+}
+
+.footer__logo__img {
+  height: 100%;
 }
 
 @import "media";
