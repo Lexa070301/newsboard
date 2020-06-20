@@ -367,12 +367,14 @@ if (isset($_POST["edit-new-submit"])) {
         <?php endif; ?>
         <?php if ($_COOKIE['type_id'] == 1): ?>
             <div class="tabs__content">
-                <canvas id="stats__item__dates">
+                <div class="stats">
+                    <canvas id="stats__item__dates">
 
-                </canvas>
-                <canvas id="stats__item__users">
+                    </canvas>
+                    <canvas id="stats__item__users">
 
-                </canvas>
+                    </canvas>
+                </div>
             </div>
         <?php endif; ?>
     </div>
@@ -467,6 +469,10 @@ for ($i = 0; $i < 20; $i++) {
             }
             ?>
         ];
+        var aspectRatio = 2;
+        if (window.screen.width < 800) {
+            aspectRatio = 1;
+        }
         var ctx1 = document.getElementById('stats__item__dates').getContext('2d');
         var chart1 = new Chart(ctx1, {
             type: 'line',
@@ -503,7 +509,8 @@ for ($i = 0; $i < 20; $i++) {
                             labelString: 'Даты'
                         }
                     }]
-                }
+                },
+                aspectRatio: aspectRatio
             }
         });
         var ctx2 = document.getElementById('stats__item__users').getContext('2d');
@@ -542,7 +549,8 @@ for ($i = 0; $i < 20; $i++) {
                             labelString: 'Даты'
                         }
                     }]
-                }
+                },
+                aspectRatio: aspectRatio
             }
         });
         <?php

@@ -9,7 +9,7 @@ if (isset($_POST["submit"])) {
     $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
     $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
     $password = password_hash(super_hash($password), PASSWORD_DEFAULT);
-    mysqli_query($database, "INSERT INTO users (name, email, password, type_id) VALUES ('$name', '$email', '$password', 2)");
+    mysqli_query($database, "INSERT INTO users (name, email, password, type_id, date) VALUES ('$name', '$email', '$password', 2, CURRENT_DATE())");
     $temp = 'registration';
 }
 ?>
