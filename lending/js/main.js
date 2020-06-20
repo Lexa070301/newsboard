@@ -1,8 +1,6 @@
 $(document).ready(function () {
     var scene = document.getElementById('scene');
     var parallaxInstance = new Parallax(scene);
-    var img_scene = document.getElementById('goal__img-scene');
-    var parallaxInstance = new Parallax(img_scene);
     new WOW().init();
     $('.header__menu__link, .footer__logo').on( 'click', function(){
         var el = $(this);
