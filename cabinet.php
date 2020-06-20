@@ -235,6 +235,9 @@ if (isset($_POST["edit-new-submit"])) {
             <?php if (($_COOKIE['type_id'] == 1) || ($_COOKIE['type_id'] == 3)): ?>
                 <li>Проверить новости</li>
             <?php endif; ?>
+            <?php if ($_COOKIE['type_id'] == 1): ?>
+                <li>Статистика</li>
+            <?php endif; ?>
         </ul>
         <form action="" method="post" class="delete-form-drawer">
             <input type="submit" name="delete" value="Удалить аккаунт"
@@ -247,6 +250,9 @@ if (isset($_POST["edit-new-submit"])) {
             <li>Предложить новость</li>
             <?php if (($_COOKIE['type_id'] == 1) || ($_COOKIE['type_id'] == 3)): ?>
                 <li>Проверить новости</li>
+            <?php endif; ?>
+            <?php if ($_COOKIE['type_id'] == 1): ?>
+                <li>Статистика</li>
             <?php endif; ?>
         </ul>
         <form action="" method="post" class="delete-form">
@@ -359,6 +365,17 @@ if (isset($_POST["edit-new-submit"])) {
                 </ul>
             </div>
         <?php endif; ?>
+        <?php if ($_COOKIE['type_id'] == 1): ?>
+        <div class="tabs__content">
+            <ul class="stats">
+                <li class="stats__item">
+                    <canvas id="stats__item_chart">
+
+                    </canvas>
+                </li>
+            </ul>
+        </div>
+        <?php endif; ?>
     </div>
 </main>
 <footer>
@@ -375,9 +392,49 @@ if (isset($_POST["edit-new-submit"])) {
 <script src="js/jquery.fancybox.min.js"></script>
 <script src="js/remodal.min.js"></script>
 <script src="js/sweetalert2.min.js"></script>
+<script src="js/chart.min.js"></script>
 <script>
     $(document).ready(function () {
-        <?php
+        var ctx = document.getElementById('stats__item_chart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["Jun 2016", "Jul 2016", "Aug 2016", "Sep 2016", "Oct 2016", "Nov 2016", "Dec 2016", "Jan 2017", "Feb 2017", "Mar 2017", "Apr 2017", "May 2017"],
+                datasets: [{
+                    label: "Rainfall",
+                    backgroundColor: 'lightblue',
+                    borderColor: 'royalblue',
+                    data: [26.4, 39.8, 66.8, 66.4, 40.6, 55.2, 77.4, 69.8, 57.8, 76, 110.8, 142.6],
+                }]
+            },
+            options: {
+                layout: {
+                    padding: 10,
+                },
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: 'Precipitation in Toronto'
+                },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Precipitation in mm'
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Month of the Year'
+                        }
+                    }]
+                }
+            }
+        });
+    <?php
         if ($temp == 'incorrect') {
             echo '
                Swal.fire({

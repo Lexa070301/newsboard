@@ -945,4 +945,15 @@ input[type="file" i]::-webkit-file-upload-button {
   width: 300px;
   margin-bottom: 10px;
 }
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-around;
+  position: relative;
+  margin: auto;
+  height: 80vh;
+  width: 80vw;
+}
+
 @import "media";
