@@ -20,6 +20,7 @@ body {
 p, span, a, h1, h2, h3, h4, h5, li, div, img, body, main, header, footer {
   &::selection {
     background-color: $sub_color;
+    color: white;
   }
 }
 
@@ -217,12 +218,11 @@ header {
   width: 250px;
 }
 
-.developer {
-  .container {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-  }
+.developer-wrap {
+  display: flex;
+  margin-top: 50px;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 .developer__content {
@@ -255,6 +255,25 @@ header {
 
 .developer__content__text {
   line-height: 1.5em;
+}
+
+.result {
+  background-color: #f8f8f8;
+}
+
+.result__text {
+  line-height: 1.5em;
+  font-size: 18px;
+}
+
+.gallery__grid {
+  margin: 0px auto;
+  margin-top: 50px !important;
+}
+
+.gallery__grid__item {
+  margin-bottom: 30px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
 
 @import "media";

@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
 
     <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/jquery.fancybox.min.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Newsboard - Lending</title>
@@ -31,10 +32,10 @@
                     <a href="#developer" class="header__menu__link">Разработчик</a>
                 </li>
                 <li class="header__menu__item">
-                    <a href="#" class="header__menu__link">Результат</a>
+                    <a href="#result" class="header__menu__link">Результат</a>
                 </li>
                 <li class="header__menu__item">
-                    <a href="#" class="header__menu__link">Не придумал</a>
+                    <a href="#gallery" class="header__menu__link">Галерея</a>
                 </li>
             </ul>
         </nav>
@@ -49,9 +50,6 @@
                     Целью моей работы являлось создание современного, красивого, функционального новостного
                     веб-портала, с регистрацией и возможностью пользователям предлогать свои новости, которые идут на
                     одобрение редакторам, а затем попадают на сайт.
-                    <!--                    В своей работе я опирался на уже существующие успешные новостные ресурсы.-->
-                    <!--                    Но проект newsboard не лишён своей индивидуальности, современный -->
-                    <!--                    дизайн и удачное цветовое решение делают его привликательным источником -->
                 </div>
                 <div id="goal__img-scene">
                     <div data-depth="1" class="goal__img-border"></div>
@@ -123,19 +121,75 @@
     </section>
     <section class="developer" id="developer">
         <div class="container">
-            <img src="img/developer.png" alt="Фото разработчика" class="developer__img">
-            <div class="developer__content">
-                <h3 class="developer__content__name">Перфильев Алексей</h3>
-                <span class="developer__content__group">Группа: 191-321</span>
-                <a target="_blank" class="developer__content__vk" href="https://vk.com/alexey_perfiliev">
-                    <img src="img/icons/vk.svg" alt="Ссылка на вк" class="developer__content__vk__img">
-                </a>
-                <p class="developer__content__text">
-                    Я - Frontend-разработчик и дизайнер, но прежде всего я такой же человек, как и вы. У меня есть свои
-                    мечты и цели, свои заботы и переживания. Я всегда был очень деятельным и ответственным. В работу
-                    погружаюсь с головой и, порой, могу сидеть за интересным проектом по 12 часов в день. Главное в
-                    жизни для меня - это самореализация, личностный рост и развитие.
+            <h2 class="common-title result__title">Разработчик</h2>
+            <div class="developer-wrap">
+                <img src="img/developer.png" alt="Фото разработчика" class="developer__img">
+                <div class="developer__content">
+                    <h3 class="developer__content__name">Перфильев Алексей</h3>
+                    <span class="developer__content__group">Группа: 191-321</span>
+                    <a target="_blank" class="developer__content__vk" href="https://vk.com/alexey_perfiliev">
+                        <img src="img/icons/vk.svg" alt="Ссылка на вк" class="developer__content__vk__img">
+                    </a>
+                    <p class="developer__content__text">
+                        Я - Frontend-разработчик и дизайнер, но прежде всего я такой же человек, как и вы. У меня есть
+                        свои
+                        мечты и цели, свои заботы и переживания. Я всегда был очень деятельным и ответственным. В работу
+                        погружаюсь с головой и, порой, могу сидеть за интересным проектом по 12 часов в день. Главное в
+                        жизни для меня - это самореализация, личностный рост и развитие.
+                </div>
             </div>
+        </div>
+    </section>
+    <section id="result" class="result">
+        <div class="container">
+            <h2 class="common-title result__title">Результат</h2>
+            <p class="result__text">
+                В своей работе я опирался на уже существующие успешные новостные ресурсы.
+                Но проект newsboard не лишён своей индивидуальности, современный
+                дизайн и удачное цветовое решение делают его привликательным источником для получения информации.
+            </p>
+        </div>
+    </section>
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="common-title gallery__title">Галерея</h2>
+            <ul class="gallery__grid">
+                <li class="gallery__grid__item">
+                    <a class="gallery__grid__fancy" rel="group" href="img/gallery/img1.png" data-fancybox="images">
+                        <img src="img/gallery-small/img1.png" alt="Результат" class="gallery__grid__fancy__img">
+                    </a>
+                </li>
+                <li class="gallery__grid__item">
+                    <a class="gallery__grid__fancy" rel="group" href="img/gallery/img2.png" data-fancybox="images">
+                        <img src="img/gallery-small/img2.png" alt="Результат" class="gallery__grid__fancy__img">
+                    </a>
+                </li>
+                <li class="gallery__grid__item">
+                    <a class="gallery__grid__fancy" rel="group" href="img/gallery/img3.png" data-fancybox="images">
+                        <img src="img/gallery-small/img3.png" alt="Результат" class="gallery__grid__fancy__img">
+                    </a>
+                </li>
+                <li class="gallery__grid__item">
+                    <a class="gallery__grid__fancy" rel="group" href="img/gallery/img4.png" data-fancybox="images">
+                        <img src="img/gallery-small/img4.png" alt="Результат" class="gallery__grid__fancy__img">
+                    </a>
+                </li>
+                <li class="gallery__grid__item">
+                    <a class="gallery__grid__fancy" rel="group" href="img/gallery/img5.png" data-fancybox="images">
+                        <img src="img/gallery-small/img5.png" alt="Результат" class="gallery__grid__fancy__img">
+                    </a>
+                </li>
+                <li class="gallery__grid__item">
+                    <a class="gallery__grid__fancy" rel="group" href="img/gallery/img6.png" data-fancybox="images">
+                        <img src="img/gallery-small/img6.png" alt="Результат" class="gallery__grid__fancy__img">
+                    </a>
+                </li>
+                <li class="gallery__grid__item">
+                    <a class="gallery__grid__fancy" rel="group" href="img/gallery/img7.png" data-fancybox="images">
+                        <img src="img/gallery-small/img7.png" alt="Результат" class="gallery__grid__fancy__img">
+                    </a>
+                </li>
+            </ul>
         </div>
     </section>
 </main>
@@ -145,6 +199,8 @@
 <script src="../js/jquery-3.5.1.min.js"></script>
 <script src="../js/jquery-migrate-1.2.1.min.js"></script>
 <script src="../js/jquery.fancybox.min.js"></script>
+<script src="../js/imagesloaded.pkgd.min.js"></script>
+<script src="../js/masonry.pkgd.min.js"></script>
 <script src="js/parallax.min.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/main.js"></script>
