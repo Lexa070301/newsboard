@@ -366,15 +366,14 @@ if (isset($_POST["edit-new-submit"])) {
             </div>
         <?php endif; ?>
         <?php if ($_COOKIE['type_id'] == 1): ?>
-        <div class="tabs__content">
-            <ul class="stats">
-                <li class="stats__item">
-                    <canvas id="stats__item_chart">
+            <div class="tabs__content">
+                <canvas id="stats__item__dates">
 
-                    </canvas>
-                </li>
-            </ul>
-        </div>
+                </canvas>
+                <canvas id="stats__item__users">
+
+                </canvas>
+            </div>
         <?php endif; ?>
     </div>
 </main>
@@ -393,18 +392,91 @@ if (isset($_POST["edit-new-submit"])) {
 <script src="js/remodal.min.js"></script>
 <script src="js/sweetalert2.min.js"></script>
 <script src="js/chart.min.js"></script>
+<?php
+$accepted_news = mysqli_fetch_all(mysqli_query($database, 'SELECT count(date) AS dates, date FROM news WHERE status = "accepted" GROUP BY date ORDER BY date DESC'), MYSQLI_BOTH);
+$users = mysqli_fetch_all(mysqli_query($database, 'SELECT count(date) AS dates, date FROM users GROUP BY date ORDER BY date DESC'), MYSQLI_BOTH);
+
+$last_days = [
+    0 => date("Y-m-d"),
+    1 => date("Y-m-d", strtotime("-1 day")),
+    2 => date("Y-m-d", strtotime("-2 day")),
+    3 => date("Y-m-d", strtotime("-3 day")),
+    4 => date("Y-m-d", strtotime("-4 day")),
+    5 => date("Y-m-d", strtotime("-5 day")),
+    6 => date("Y-m-d", strtotime("-6 day")),
+    7 => date("Y-m-d", strtotime("-7 day")),
+    8 => date("Y-m-d", strtotime("-8 day")),
+    9 => date("Y-m-d", strtotime("-9 day")),
+    10 => date("Y-m-d", strtotime("-10 day")),
+    11 => date("Y-m-d", strtotime("-11 day")),
+    12 => date("Y-m-d", strtotime("-12 day")),
+    13 => date("Y-m-d", strtotime("-13 day")),
+    14 => date("Y-m-d", strtotime("-14 day")),
+    15 => date("Y-m-d", strtotime("-15 day")),
+    16 => date("Y-m-d", strtotime("-16 day")),
+    17 => date("Y-m-d", strtotime("-17 day")),
+    18 => date("Y-m-d", strtotime("-18 day")),
+    19 => date("Y-m-d", strtotime("-19 day")),
+];
+$dates = array();
+$j = 0;
+for ($i = 0; $i < 20; $i++) {
+    if (strval($accepted_news[$j]['date']) == strval($last_days[$i])) {
+        $dates[] = $accepted_news[$j]['dates'];
+        $j++;
+    } else {
+        $dates[] = 0;
+    }
+}
+$users_arr = array();
+$j = 0;
+for ($i = 0; $i < 20; $i++) {
+    if (strval($users[$j]['date']) == strval($last_days[$i])) {
+        $users_arr[] = $users[$j]['dates'];
+        $j++;
+    } else {
+        $users_arr[] = 0;
+    }
+}
+?>
 <script>
     $(document).ready(function () {
-        var ctx = document.getElementById('stats__item_chart').getContext('2d');
-        var chart = new Chart(ctx, {
+        var date = [];
+        var dateTimeFormat = [];
+        for (var i = 0; i < 20; i++) {
+            date[i] = new Date();
+            date[i].setDate(date[i].getDate() - i);
+            dateTimeFormat[i] = new Intl.DateTimeFormat('ru', {
+                year: '2-digit',
+                month: '2-digit',
+                day: '2-digit'
+            }).format(date[i]);
+        }
+        dateTimeFormat.reverse();
+        var count_dates = [
+            <?php
+            for ($i = 0; $i < count($dates); $i++) {
+                echo $dates[$i] . ', ';
+            }
+            ?>
+        ];
+        var count_users = [
+            <?php
+            for ($i = 0; $i < count($users_arr); $i++) {
+                echo $users_arr[$i] . ', ';
+            }
+            ?>
+        ];
+        var ctx1 = document.getElementById('stats__item__dates').getContext('2d');
+        var chart1 = new Chart(ctx1, {
             type: 'line',
             data: {
-                labels: ["Jun 2016", "Jul 2016", "Aug 2016", "Sep 2016", "Oct 2016", "Nov 2016", "Dec 2016", "Jan 2017", "Feb 2017", "Mar 2017", "Apr 2017", "May 2017"],
+                labels: dateTimeFormat,
                 datasets: [{
-                    label: "Rainfall",
+                    label: 'Количество',
                     backgroundColor: 'lightblue',
                     borderColor: 'royalblue',
-                    data: [26.4, 39.8, 66.8, 66.4, 40.6, 55.2, 77.4, 69.8, 57.8, 76, 110.8, 142.6],
+                    data: count_dates.reverse(),
                 }]
             },
             options: {
@@ -416,25 +488,64 @@ if (isset($_POST["edit-new-submit"])) {
                 },
                 title: {
                     display: true,
-                    text: 'Precipitation in Toronto'
+                    text: 'Количество новостей за последние дни'
                 },
                 scales: {
                     yAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Precipitation in mm'
+                            labelString: 'Количество новостей'
                         }
                     }],
                     xAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Month of the Year'
+                            labelString: 'Даты'
                         }
                     }]
                 }
             }
         });
-    <?php
+        var ctx2 = document.getElementById('stats__item__users').getContext('2d');
+        var chart2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: dateTimeFormat,
+                datasets: [{
+                    label: 'Количество',
+                    backgroundColor: 'lightsalmon',
+                    borderColor: 'salmon',
+                    data: count_users.reverse(),
+                }]
+            },
+            options: {
+                layout: {
+                    padding: 10,
+                },
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: 'Количество новых пользователей за последние дни'
+                },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Количество пользователей'
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Даты'
+                        }
+                    }]
+                }
+            }
+        });
+        <?php
         if ($temp == 'incorrect') {
             echo '
                Swal.fire({
