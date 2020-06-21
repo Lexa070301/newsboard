@@ -374,6 +374,12 @@ if (isset($_POST["edit-new-submit"])) {
                     <canvas id="stats__item__users">
 
                     </canvas>
+                    <canvas id="stats__item__users-type">
+
+                    </canvas>
+                    <canvas id="stats__item__news-categories">
+
+                    </canvas>
                 </div>
             </div>
         <?php endif; ?>
@@ -397,6 +403,8 @@ if (isset($_POST["edit-new-submit"])) {
 <?php
 $accepted_news = mysqli_fetch_all(mysqli_query($database, 'SELECT count(date) AS dates, date FROM news WHERE status = "accepted" GROUP BY date ORDER BY date DESC'), MYSQLI_BOTH);
 $users = mysqli_fetch_all(mysqli_query($database, 'SELECT count(date) AS dates, date FROM users GROUP BY date ORDER BY date DESC'), MYSQLI_BOTH);
+$user_types = mysqli_fetch_all(mysqli_query($database, 'SELECT count(type_id) AS type FROM users GROUP BY type_id ORDER BY type_id DESC'), MYSQLI_BOTH);
+$news_categories = mysqli_fetch_all(mysqli_query($database, 'SELECT count(category_id) AS category_id_count FROM join_table GROUP BY category_id ORDER BY category_id DESC'), MYSQLI_BOTH);
 
 $last_days = [
     0 => date("Y-m-d"),
@@ -469,6 +477,20 @@ for ($i = 0; $i < 20; $i++) {
             }
             ?>
         ];
+        var count_user_types = [
+            <?php
+            for ($i = 0; $i < count($user_types); $i++) {
+                echo $user_types[$i]['type'] . ', ';
+            }
+            ?>
+        ];
+        var news_categories_count = [
+            <?php
+            for ($i = 0; $i < count($news_categories); $i++) {
+                echo $news_categories[$i]['category_id_count'] . ', ';
+            }
+            ?>
+        ];
         var aspectRatio = 2;
         if (window.screen.width < 800) {
             aspectRatio = 1;
@@ -490,6 +512,7 @@ for ($i = 0; $i < 20; $i++) {
                     padding: 10,
                 },
                 legend: {
+                    display: false,
                     position: 'bottom',
                 },
                 title: {
@@ -530,6 +553,7 @@ for ($i = 0; $i < 20; $i++) {
                     padding: 10,
                 },
                 legend: {
+                    display: false,
                     position: 'bottom',
                 },
                 title: {
@@ -547,6 +571,102 @@ for ($i = 0; $i < 20; $i++) {
                         scaleLabel: {
                             display: true,
                             labelString: 'Даты'
+                        }
+                    }]
+                },
+                aspectRatio: aspectRatio
+            }
+        });
+        var bar1 = document.getElementById('stats__item__users-type').getContext('2d');
+        var barConfig = new Chart(bar1, {
+            type: 'bar',
+            data: {
+                labels: ['Редакторы', 'Пользователи', 'Админы'],
+                datasets: [{
+                    label: 'Количество пользователей',
+                    data: count_user_types,
+                    backgroundColor: [
+                        'lightblue',
+                        'lightpink',
+                        'lightgreen',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                layout: {
+                    padding: 10,
+                },
+                legend: {
+                    display: false,
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: 'Количество пользователей по типам'
+                },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Количество пользователей'
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Тип'
+                        }
+                    }]
+                },
+                aspectRatio: aspectRatio
+            }
+        });
+        var bar2 = document.getElementById('stats__item__news-categories').getContext('2d');
+        var barConfig = new Chart(bar2, {
+            type: 'bar',
+            data: {
+                labels: ['Спорт', 'Экономика', 'Политика'],
+                datasets: [{
+                    label: 'Количество пользователей',
+                    data: news_categories_count,
+                    backgroundColor: [
+                        'lightsteelblue',
+                        'lightcyan',
+                        'lightgoldenrodyellow',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                layout: {
+                    padding: 10,
+                },
+                legend: {
+                    display: false,
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: 'Новостей в каждой категории'
+                },
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Количество новостей'
+                        },
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Категория'
                         }
                     }]
                 },
