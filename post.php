@@ -1,7 +1,7 @@
 <?php
 include('functions.php');
 $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news WHERE status = "accepted" ORDER BY id DESC'), MYSQLI_BOTH);
-$post = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id AS id, title, name, date, text, status FROM news INNER JOIN users ON (author_id = users.id) WHERE news.id = ' . $_GET['id'] . ' ORDER BY news.id DESC'), MYSQLI_BOTH);
+$post = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id AS id, title, name, news.date AS date, text, status FROM news INNER JOIN users ON (author_id = users.id) WHERE news.id = ' . $_GET['id'] . ' ORDER BY news.id DESC'), MYSQLI_BOTH);
 $description = mysqli_fetch_all(mysqli_query($database, 'SELECT description FROM join_table INNER JOIN categories ON (category_id = categories.id) WHERE news_id = ' . $_GET['id'] . ' ORDER BY news_id DESC'), MYSQLI_BOTH);
 $keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_table INNER JOIN categories ON (join_table.category_id = categories.id) INNER JOIN keywords ON (categories.id = keywords.category_id) WHERE news_id = ' . $_GET['id'] . ' ORDER BY keywords.category_id'), MYSQLI_BOTH);
 if (isset($_POST["submit"])) {
