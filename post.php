@@ -4,6 +4,19 @@ $news = mysqli_fetch_all(mysqli_query($database, 'SELECT * FROM news WHERE statu
 $post = mysqli_fetch_all(mysqli_query($database, 'SELECT news.id AS id, title, name, news.date AS date, text, status FROM news INNER JOIN users ON (author_id = users.id) WHERE news.id = ' . $_GET['id'] . ' ORDER BY news.id DESC'), MYSQLI_BOTH);
 $description = mysqli_fetch_all(mysqli_query($database, 'SELECT description FROM join_table INNER JOIN categories ON (category_id = categories.id) WHERE news_id = ' . $_GET['id'] . ' ORDER BY news_id DESC'), MYSQLI_BOTH);
 $keywords = mysqli_fetch_all(mysqli_query($database, 'SELECT keyword FROM join_table INNER JOIN categories ON (join_table.category_id = categories.id) INNER JOIN keywords ON (categories.id = keywords.category_id) WHERE news_id = ' . $_GET['id'] . ' ORDER BY keywords.category_id'), MYSQLI_BOTH);
+$email = $_COOKIE['user'];
+$user = mysqli_fetch_all(mysqli_query($database, "SELECT * FROM users WHERE email = '$email'"), MYSQLI_BOTH);
+if (($_COOKIE['user'] != $user[0]['email']) || ($_COOKIE['name'] != $user[0]['name']) || ($_COOKIE['id'] != $user[0]['id']) || ($_COOKIE['type_id'] != $user[0]['type_id'])) {
+    unset($_COOKIE['user']);
+    unset($_COOKIE['name']);
+    unset($_COOKIE['id']);
+    unset($_COOKIE['type_id']);
+    setcookie('user', null, -1, '/');
+    setcookie('name', null, -1, '/');
+    setcookie('id', null, -1, '/');
+    setcookie('type_id', null, -1, '/');
+    header("Location: ./");
+}
 if (isset($_POST["submit"])) {
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $name = filter_var(trim($_POST['name']), FILTER_SANITIZE_STRING);
@@ -41,6 +54,13 @@ if (isset($_POST["submit-out"])) {
     setcookie('id', $array[0]['id'], time() - 3600, "/");
     setcookie('type_id', $array[0]['type_id'], time() - 3600, "/");
     header("Location: ./post.php?id=" . $_GET['id'] . "");
+}
+?>
+<?php
+if (isset($_POST["delete"])) {
+    $id = $post[0]['id'];
+    mysqli_query($database, "UPDATE news SET status = 'deleted' WHERE id = $id");
+    header("Location: ./");
 }
 ?>
     <!doctype html>
@@ -165,6 +185,12 @@ if (isset($_POST["submit-out"])) {
         </div>
     </header>
     <main class="post-main">
+        <?php if ($_COOKIE['type_id'] == 1): ?>
+            <form action="" method="post" class="delete-post">
+                <input type="submit" name="delete" value="Удалить новость"
+                       class="delete-form__btn">
+            </form>
+        <?php endif; ?>
         <section class="post">
             <div class="container">
                 <h1 class="post__main-title">

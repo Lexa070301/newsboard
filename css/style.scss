@@ -11,12 +11,14 @@ body {
   background-color: #f5f5f5;
   color: $dark;
 }
+
 p, span, a, h1, h2, h3, h4, h5, li, div, img, body, main, header, footer {
   &::selection {
     background-color: $sub_color;
     color: white;
   }
 }
+
 body::-webkit-scrollbar {
   width: 7px;
   background: none;
@@ -799,8 +801,13 @@ input[type="file" i]::-webkit-file-upload-button {
 
 .post-main {
   padding: 50px 0px;
+  position: relative;
 }
-
+.delete-post {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+}
 .post {
   .container {
     max-width: 700px;
@@ -932,8 +939,7 @@ input[type="file" i]::-webkit-file-upload-button {
   }
 }
 
-.edit-new-send {
-  margin-top: 10px;
+.edit-new-send, .edit-new-delete {
   width: 250px;
   box-sizing: border-box;
   height: 40px;
@@ -945,6 +951,7 @@ input[type="file" i]::-webkit-file-upload-button {
   @include tr;
   outline: none;
   padding: 0px 20px;
+  margin-top: 10px;
 
   &:hover {
     background-color: $main_color;
@@ -961,4 +968,27 @@ input[type="file" i]::-webkit-file-upload-button {
   width: 300px;
   margin-bottom: 10px;
 }
+
+.edit-new-btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.edit-new-delete {
+  background-color: red;
+
+  &:hover {
+    background-color: red;
+    box-shadow: 0px 0px 10px rgba(red, 0.7);
+  }
+
+  &:focus {
+    background-color: red;
+    box-shadow: 0px 0px 10px rgba(red, 0.7);
+  }
+}
+
 @import "media";

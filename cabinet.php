@@ -140,6 +140,16 @@ if (isset($_POST["add-new-submit"])) {
 }
 ?>
 <?php
+if (isset($_POST["edit-new-delete"])) {
+    $hidden = $_POST['edit-new-hidden'];
+    mysqli_query($database, "DELETE FROM join_table WHERE news_id = $hidden");
+    mysqli_query($database, "DELETE FROM news WHERE news.id = $hidden");
+    $useless = unlink('img/news/img' . $hidden . '.webp');
+    $useless = unlink('img/news-small/img' . $hidden . '.webp');
+    header("Location: ./cabinet.php");
+}
+?>
+<?php
 if (isset($_POST["edit-new-submit"])) {
     $category = filter_var(trim($_POST['edit-new-category']), FILTER_SANITIZE_STRING);
     $title = filter_var(trim($_POST['edit-new-title']), FILTER_SANITIZE_STRING);
@@ -295,7 +305,7 @@ if (isset($_POST["edit-new-submit"])) {
         </div>
         <div class="tabs__content">
             <h2>Предложить новость:</h2>
-            <form action="./cabinet.php" method="post" id="add-new" class="add-new" enctype="multipart/form-data">
+            <form action="" method="post" id="add-new" class="add-new" enctype="multipart/form-data">
                 <label for="add-new-category">Выберите тему<span>*</span>:</label>
                 <select required name="add-new-category" id="add-new-category"
                         class="form-input">
@@ -311,7 +321,7 @@ if (isset($_POST["edit-new-submit"])) {
                 <textarea required minlength="500" placeholder="Текст новости" name="add-new-text" id="add-new-text"
                           class="form-input"></textarea>
                 <label for="add-new-file">Загрузите картинку(только WebP)<span>*</span>:</label>
-                <input type="file" name="image" id="add-new-file" accept="image/webp">
+                <input required type="file" name="image" id="add-new-file" accept="image/webp">
                 <input type="submit" name="add-new-submit" value="Отправить" class="add-new-send">
             </form>
         </div>
@@ -336,7 +346,7 @@ if (isset($_POST["edit-new-submit"])) {
                                     break;
                             }
                             echo '<li class="edit__item">
-                                        <form action="./cabinet.php" method="post" class="edit-new" enctype="multipart/form-data">
+                                        <form action="" method="post" class="edit-new" enctype="multipart/form-data">
                                             <select required name="edit-new-category"
                                                     class="form-input">
                                                 <option value="Политика" ' . $selected1 . '>Политика</option>
@@ -354,7 +364,10 @@ if (isset($_POST["edit-new-submit"])) {
                                             </a>
                                             <input type="file" class="form-input" name="image" accept="image/webp">
                                             <input type="hidden" name="edit-new-hidden" value="' . $news[$i]["id"] . '">
+                                            <div class="edit-new-btns"> 
                                             <input type="submit" name="edit-new-submit" value="Отправить" class="edit-new-send">
+                                            <input type="submit" name="edit-new-delete" value="Удалить" class="edit-new-delete">
+                                            </div>
                                         </form>
                                     </li>';
                         }
@@ -451,6 +464,7 @@ for ($i = 0; $i < 20; $i++) {
 ?>
 <script>
     $(document).ready(function () {
+        <?php if ($_COOKIE['type_id'] == 1): ?>
         var date = [];
         var dateTimeFormat = [];
         for (var i = 0; i < 20; i++) {
@@ -673,6 +687,7 @@ for ($i = 0; $i < 20; $i++) {
                 aspectRatio: aspectRatio
             }
         });
+        <?php endif; ?>
         <?php
         if ($temp == 'incorrect') {
             echo '
