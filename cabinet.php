@@ -109,6 +109,8 @@ if (isset($_POST["submit-out"])) {
 if (isset($_POST["delete"])) {
     $email = $_COOKIE['user'];
     $array = mysqli_fetch_all(mysqli_query($database, "SELECT * FROM users WHERE email = '$email'"), MYSQLI_BOTH);
+    $author = $array[0]['id'];
+    mysqli_query($database, "DELETE FROM news WHERE author_id = $author");
     mysqli_query($database, "DELETE FROM users WHERE email = '$email'");
     setcookie('user', $array[0]['email'], time() - 3600, "/");
     setcookie('name', $array[0]['name'], time() - 3600, "/");
