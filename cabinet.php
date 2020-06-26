@@ -647,7 +647,7 @@ for ($i = 0; $i < 20; $i++) {
             data: {
                 labels: ['Спорт', 'Экономика', 'Политика'],
                 datasets: [{
-                    label: 'Количество пользователей',
+                    label: 'Количество новостей',
                     data: news_categories_count,
                     backgroundColor: [
                         'lightsteelblue',
