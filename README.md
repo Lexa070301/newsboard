@@ -5,4 +5,4 @@
 Email админа: admin@mail.ru <br>
 Пароль админа: 12345678 <br>
 Email редактора: edit@gmail.com <br>
-Пароль админа: edit1337 <br>
+Пароль редактора: edit1337 <br>
