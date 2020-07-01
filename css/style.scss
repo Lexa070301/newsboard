@@ -18,7 +18,9 @@ p, span, a, h1, h2, h3, h4, h5, li, div, img, body, main, header, footer {
     color: white;
   }
 }
-
+main {
+	min-height: 100vh;
+}
 body::-webkit-scrollbar {
   width: 7px;
   background: none;
